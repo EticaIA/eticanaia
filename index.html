@@ -994,6 +994,62 @@
     .testimonial-role { font-size: 0.78rem; color: var(--muted); }
 
     /* ================================================ */
+    /* CHAT — PAINEL DE API KEY                         */
+    /* ================================================ */
+    .chat-apikey-panel {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: var(--s3); gap: var(--s2); text-align: center;
+    }
+    .chat-apikey-icon { font-size: 2.2rem; margin-bottom: 4px; }
+    .chat-apikey-title {
+      font-family: var(--font-display); font-weight: 700;
+      color: var(--white); font-size: 0.95rem;
+    }
+    .chat-apikey-desc {
+      font-size: 0.78rem; color: rgba(255,255,255,0.5);
+      line-height: 1.6; max-width: 280px;
+    }
+    .chat-apikey-desc a { color: var(--gold); text-decoration: underline; }
+    .chat-apikey-input-wrap { width: 100%; position: relative; }
+    .chat-apikey-input {
+      width: 100%; padding: 10px 36px 10px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: var(--r-md);
+      color: var(--white); font-size: 0.82rem;
+      font-family: monospace;
+      transition: border-color var(--t-fast);
+    }
+    .chat-apikey-input::placeholder { color: rgba(255,255,255,0.3); }
+    .chat-apikey-input:focus { outline: none; border-color: var(--gold); }
+    .chat-apikey-eye {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--muted);
+      cursor: pointer; font-size: 1rem; padding: 2px;
+    }
+    .chat-apikey-btn {
+      width: 100%; padding: 11px;
+      background: var(--grad-gold); color: var(--ink);
+      font-weight: 700; font-size: 0.88rem;
+      border: none; border-radius: var(--r-md);
+      cursor: pointer; transition: all var(--t-fast);
+    }
+    .chat-apikey-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+    .chat-apikey-error {
+      font-size: 0.75rem; color: #f08080; display: none; margin-top: -4px;
+    }
+    .chat-apikey-error.show { display: block; }
+    .chat-apikey-footer { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 4px; }
+    .chat-reset-key {
+      font-size: 0.7rem; color: var(--muted);
+      background: none; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-full); padding: 3px 10px;
+      cursor: pointer; transition: all var(--t-fast); white-space: nowrap;
+    }
+    .chat-reset-key:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ================================================ */
     /* ERRO INLINE FORMULÁRIO                           */
     /* ================================================ */
     .field-error {
@@ -1913,29 +1969,55 @@
 
   <div class="chat-window" id="chatWindow" role="dialog"
     aria-modal="true" aria-label="Assistente virtual de Ética em IA">
+
+    <!-- Header -->
     <div class="chat-header">
       <div class="chat-avatar" aria-hidden="true">⚖️</div>
       <div class="chat-header-info">
         <p class="chat-header-name">Assistente Ética IA</p>
-        <p class="chat-header-status">Online — powered by Claude</p>
+        <p class="chat-header-status" id="chatStatus">Online — powered by Claude</p>
       </div>
+      <button class="chat-reset-key" id="chatResetKey" style="display:none" title="Trocar chave de API">🔑 Trocar chave</button>
       <button class="chat-close" id="chatClose" aria-label="Fechar chat">✕</button>
     </div>
 
-    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
-
-    <div class="chat-suggestions" id="chatSuggestions">
-      <button class="chat-sug" data-msg="O que é LGPD?">O que é LGPD?</button>
-      <button class="chat-sug" data-msg="O que é o AI Act europeu?">AI Act europeu</button>
-      <button class="chat-sug" data-msg="O que é viés algorítmico?">Viés algorítmico</button>
+    <!-- Painel de configuração da API Key -->
+    <div class="chat-apikey-panel" id="chatApiPanel">
+      <div class="chat-apikey-icon">🔑</div>
+      <p class="chat-apikey-title">Configure sua chave de API</p>
+      <p class="chat-apikey-desc">
+        Para usar o assistente, insira sua chave da API da Anthropic.<br>
+        Obtenha gratuitamente em
+        <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>
+      </p>
+      <div class="chat-apikey-input-wrap">
+        <input class="chat-apikey-input" type="password" id="apiKeyInput"
+          placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
+        <button class="chat-apikey-eye" id="apiKeyEye" aria-label="Mostrar/ocultar chave">👁</button>
+      </div>
+      <span class="chat-apikey-error" id="apiKeyError">Chave inválida. Deve começar com "sk-ant-".</span>
+      <button class="chat-apikey-btn" id="apiKeySave">Conectar assistente →</button>
+      <p class="chat-apikey-footer">🔒 A chave fica salva apenas no seu navegador (localStorage)</p>
     </div>
 
-    <div class="chat-input-row">
-      <input class="chat-input" id="chatInput" type="text"
-        placeholder="Pergunte sobre ética em IA..."
-        aria-label="Digite sua pergunta">
-      <button class="chat-send" id="chatSend" aria-label="Enviar mensagem">➤</button>
+    <!-- Painel do chat (oculto até ter a key) -->
+    <div id="chatMain" style="display:none; flex-direction:column; flex:1; overflow:hidden">
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button class="chat-sug" data-msg="O que é LGPD?">O que é LGPD?</button>
+        <button class="chat-sug" data-msg="O que é o AI Act europeu?">AI Act europeu</button>
+        <button class="chat-sug" data-msg="O que é viés algorítmico?">Viés algorítmico</button>
+      </div>
+
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text"
+          placeholder="Pergunte sobre ética em IA..."
+          aria-label="Digite sua pergunta">
+        <button class="chat-send" id="chatSend" aria-label="Enviar mensagem">➤</button>
+      </div>
     </div>
+
   </div>
 
   <!-- ============================================ -->
@@ -2244,16 +2326,72 @@
     }
 
     // ── 7. CHATBOT COM IA (CLAUDE API) ────────────
-    const chatBtn     = document.getElementById('chatBtn');
-    const chatWindow  = document.getElementById('chatWindow');
-    const chatClose   = document.getElementById('chatClose');
-    const chatInput   = document.getElementById('chatInput');
-    const chatSend    = document.getElementById('chatSend');
-    const chatMessages= document.getElementById('chatMessages');
-    const chatSugs    = document.getElementById('chatSuggestions');
+    const chatBtn      = document.getElementById('chatBtn');
+    const chatWindow   = document.getElementById('chatWindow');
+    const chatClose    = document.getElementById('chatClose');
+    const chatApiPanel = document.getElementById('chatApiPanel');
+    const chatMain     = document.getElementById('chatMain');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatSugs     = document.getElementById('chatSuggestions');
+    const chatInput    = document.getElementById('chatInput');
+    const chatSend     = document.getElementById('chatSend');
+    const chatStatus   = document.getElementById('chatStatus');
+    const chatResetKey = document.getElementById('chatResetKey');
+    const apiKeyInput  = document.getElementById('apiKeyInput');
+    const apiKeySave   = document.getElementById('apiKeySave');
+    const apiKeyError  = document.getElementById('apiKeyError');
+    const apiKeyEye    = document.getElementById('apiKeyEye');
 
     let chatHistory = [];
-    let chatOpen = false;
+    let chatOpen    = false;
+    let ANTHROPIC_KEY = localStorage.getItem('etica_ia_key') || '';
+
+    // Mostrar/ocultar senha no campo de API key
+    apiKeyEye.addEventListener('click', () => {
+      const isPass = apiKeyInput.type === 'password';
+      apiKeyInput.type = isPass ? 'text' : 'password';
+      apiKeyEye.textContent = isPass ? '🙈' : '👁';
+    });
+
+    // Salvar chave
+    apiKeySave.addEventListener('click', () => {
+      const val = apiKeyInput.value.trim();
+      if (!val.startsWith('sk-ant-')) {
+        apiKeyError.classList.add('show');
+        apiKeyInput.focus();
+        return;
+      }
+      apiKeyError.classList.remove('show');
+      ANTHROPIC_KEY = val;
+      localStorage.setItem('etica_ia_key', val);
+      showChatMain();
+    });
+    apiKeyInput.addEventListener('keydown', e => { if (e.key === 'Enter') apiKeySave.click(); });
+    apiKeyInput.addEventListener('input', () => apiKeyError.classList.remove('show'));
+
+    // Trocar chave
+    chatResetKey.addEventListener('click', () => {
+      ANTHROPIC_KEY = '';
+      localStorage.removeItem('etica_ia_key');
+      chatHistory = [];
+      chatMessages.innerHTML = '';
+      chatMain.style.display = 'none';
+      chatApiPanel.style.display = '';
+      chatResetKey.style.display = 'none';
+      apiKeyInput.value = '';
+      chatStatus.textContent = 'Configure sua chave';
+    });
+
+    function showChatMain() {
+      chatApiPanel.style.display = 'none';
+      chatMain.style.display = 'flex';
+      chatResetKey.style.display = '';
+      chatStatus.textContent = 'Online — powered by Claude';
+      if (chatMessages.children.length === 0) {
+        addBotMsg('Olá! 👋 Sou o assistente do portal Ética IA, powered by Claude. Posso explicar sobre LGPD, AI Act, transparência algorítmica e muito mais. Como posso ajudar?');
+      }
+      chatInput.focus();
+    }
 
     function toggleChat() {
       chatOpen = !chatOpen;
@@ -2261,21 +2399,30 @@
       chatBtn.setAttribute('aria-expanded', chatOpen);
       chatBtn.querySelector('.badge')?.remove();
       if (chatOpen) {
-        chatInput.focus();
-        if (chatMessages.children.length === 0) addBotMsg(
-          'Olá! 👋 Sou o assistente virtual do portal de Ética e Governança em IA, powered by Claude. Posso explicar sobre LGPD, AI Act, transparência algorítmica e muito mais. Como posso ajudar?'
-        );
+        if (ANTHROPIC_KEY) {
+          showChatMain();
+        } else {
+          chatApiPanel.style.display = '';
+          chatMain.style.display = 'none';
+          setTimeout(() => apiKeyInput.focus(), 300);
+        }
       }
     }
 
     chatBtn.addEventListener('click', toggleChat);
     chatClose.addEventListener('click', toggleChat);
 
+    // Se já tem chave salva, prepara o painel oculto
+    if (ANTHROPIC_KEY) {
+      chatApiPanel.style.display = 'none';
+    }
+
     function addBotMsg(text) {
       const div = document.createElement('div');
       div.className = 'msg msg-bot';
-      div.textContent = text;
-      div.setAttribute('role', 'log');
+      // Suporte a quebras de linha no texto
+      div.innerHTML = text.replace(/
+/g, '<br>');
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
@@ -2291,7 +2438,7 @@
     function addTypingIndicator() {
       const div = document.createElement('div');
       div.className = 'msg msg-bot msg-typing';
-      div.id = 'typing';
+      div.id = 'typingIndicator';
       div.innerHTML = '<span></span><span></span><span></span>';
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -2300,7 +2447,7 @@
 
     async function sendChatMsg() {
       const text = chatInput.value.trim();
-      if (!text) return;
+      if (!text || !ANTHROPIC_KEY) return;
       chatInput.value = '';
       chatSugs.style.display = 'none';
 
@@ -2309,18 +2456,24 @@
 
       const typing = addTypingIndicator();
       chatSend.disabled = true;
+      chatInput.disabled = true;
 
       try {
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': ANTHROPIC_KEY,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 600,
             system: `Você é um assistente especializado em Ética e Governança em Inteligência Artificial para um portal educativo brasileiro.
 Responda sempre em português brasileiro, de forma clara, objetiva e didática.
 Foque nos temas: ética em IA, transparência algorítmica, LGPD, EU AI Act, viés algorítmico, responsabilidade digital, privacidade e governança de IA.
-Use linguagem acessível para estudantes e cidadãos, com no máximo 3 parágrafos curtos por resposta.
+Use linguagem acessível para estudantes e cidadãos. Seja conciso: no máximo 3 parágrafos curtos.
 Se perguntarem algo fora desses temas, redirecione gentilmente para os temas do portal.`,
             messages: chatHistory
           })
@@ -2329,14 +2482,24 @@ Se perguntarem algo fora desses temas, redirecione gentilmente para os temas do 
         const data = await resp.json();
         typing.remove();
 
-        const aiReply = data.content?.[0]?.text || 'Desculpe, não consegui responder no momento. Tente novamente.';
-        chatHistory.push({ role: 'assistant', content: aiReply });
-        addBotMsg(aiReply);
+        if (data.error) {
+          // Erro da API (ex: chave inválida, saldo esgotado)
+          const msg = data.error.type === 'authentication_error'
+            ? '🔑 Chave de API inválida ou expirada. Clique em "Trocar chave" para atualizar.'
+            : `⚠️ Erro da API: ${data.error.message}`;
+          addBotMsg(msg);
+        } else {
+          const aiReply = data.content?.[0]?.text || 'Desculpe, não consegui responder. Tente novamente.';
+          chatHistory.push({ role: 'assistant', content: aiReply });
+          addBotMsg(aiReply);
+        }
       } catch (err) {
         typing.remove();
-        addBotMsg('Ops! Erro de conexão. Verifique sua internet e tente novamente. 🔌');
+        addBotMsg('🔌 Erro de conexão. Verifique sua internet e tente novamente.');
+        console.error('Chat error:', err);
       } finally {
         chatSend.disabled = false;
+        chatInput.disabled = false;
         chatInput.focus();
       }
     }
