@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- ================================================ -->
+  <!-- META TAGS — SEO, RESPONSIVIDADE E REDES SOCIAIS  -->
+  <!-- ================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título SEO — H1 alinhado ao title (máx 60 chars) -->
+  <title>Ética e Governança em IA | Transparência Digital</title>
+
+  <!-- Meta description (máx 160 chars) -->
+  <meta name="description" content="Portal sobre Ética e Governança em Inteligência Artificial: transparência algorítmica, LGPD, EU AI Act e responsabilidade digital no Brasil e no mundo.">
+  <meta name="keywords" content="ética em IA, governança de inteligência artificial, LGPD, AI Act, transparência algorítmica, responsabilidade digital, viés algorítmico">
+  <meta name="author" content="Portal Ética IA">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ética e Governança em IA | Transparência Digital">
+  <meta property="og:description" content="Portal sobre Ética e Governança em Inteligência Artificial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://etica-ia.com.br">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ética e Governança em IA">
+  <meta name="twitter:description" content="Portal sobre Ética e Governança em IA: LGPD, AI Act e transparência algorítmica.">
+
+  <link rel="canonical" href="https://etica-ia.com.br">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+
+  <!-- Preconnect para performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fontes: Syne (display) + DM Sans (corpo) — design editorial moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================ */
+    /* SISTEMA DE DESIGN — VARIÁVEIS CSS                */
+    /* ================================================ */
+    :root {
+      /* Paleta: azul petróleo escuro + ouro + branco gelo */
+      --ink:       #0a0e1a;
+      --ink-mid:   #1a2035;
+      --ink-soft:  #2e3d5c;
+      --gold:      #c9a84c;
+      --gold-lt:   #e8cc7a;
+      --ice:       #f0f4f8;
+      --ice-2:     #dde6f0;
+      --white:     #ffffff;
+      --muted:     #6b7fa3;
+      --danger:    #e05252;
+      --success:   #2ecc87;
+
+      --grad-hero: linear-gradient(135deg, #0a0e1a 0%, #0d1d3b 60%, #0f2a4a 100%);
+      --grad-gold: linear-gradient(135deg, #c9a84c 0%, #e8cc7a 100%);
+      --grad-card: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+
+      /* Tipografia */
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      /* Espaçamento 8pt */
+      --s1: 0.5rem;
+      --s2: 1rem;
+      --s3: 1.5rem;
+      --s4: 2rem;
+      --s5: 3rem;
+      --s6: 4.5rem;
+      --s7: 6rem;
+
+      /* Bordas */
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --r-xl: 32px;
+      --r-full: 9999px;
+
+      /* Sombras */
+      --shadow-gold: 0 0 40px rgba(201,168,76,0.25);
+      --shadow-card: 0 8px 32px rgba(10,14,26,0.18);
+      --shadow-lg:   0 24px 60px rgba(10,14,26,0.35);
+
+      /* Transições */
+      --t-fast: 150ms ease;
+      --t-base: 260ms ease;
+      --t-slow: 420ms cubic-bezier(0.4,0,0.2,1);
+
+      /* Z-index */
+      --z-nav:    200;
+      --z-chat:   500;
+      --z-modal:  800;
+    }
+
+    /* ================================================ */
+    /* MODO CLARO (light mode override)                 */
+    /* ================================================ */
+    [data-theme="light"] {
+      --ink:       #0f172a;
+      --ink-mid:   #1e3a5f;
+      --ink-soft:  #334d6e;
+      --ice:       #f0f4f8;
+      --ice-2:     #dde6f0;
+      --white:     #ffffff;
+      --muted:     #5a6e8a;
+      --grad-hero: linear-gradient(135deg, #0f172a 0%, #1a3a6e 60%, #1a4a80 100%);
+    }
+
+    /* ================================================ */
+    /* DARK MODE TOGGLE BUTTON                          */
+    /* ================================================ */
+    .theme-toggle {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer;
+      transition: all var(--t-base);
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+
+    /* ================================================ */
+    /* RESET                                            */
+    /* ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); font-size: 1rem; line-height: 1.65; color: var(--ink); background: var(--white); overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul, ol { list-style: none; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input, textarea, select { font-family: inherit; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    /* ================================================ */
+    /* UTILITÁRIOS                                      */
+    /* ================================================ */
+    .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--s3); }
+    .section   { padding: var(--s7) 0; }
+    .section--dark { background: var(--ink); color: var(--white); }
+    .section--ink  { background: var(--ink-mid); color: var(--white); }
+    .section--ice  { background: var(--ice); }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: var(--s1);
+      padding: 6px 14px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: var(--r-full);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: var(--s2);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; line-height: 1.15;
+      margin-bottom: var(--s2);
+    }
+    .section-title--light { color: var(--white); }
+    .section-title--dark  { color: var(--ink); }
+
+    .section-desc { font-size: 1.05rem; color: var(--muted); max-width: 600px; line-height: 1.8; }
+    .section-desc--light { color: rgba(255,255,255,0.65); }
+
+    .text-gold { color: var(--gold); }
+    .grid { display: grid; gap: var(--s3); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* ================================================ */
+    /* BOTÕES                                           */
+    /* ================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--s1); padding: 14px 28px;
+      font-size: 0.95rem; font-weight: 600;
+      border-radius: var(--r-md);
+      transition: all var(--t-base);
+      cursor: pointer;
+    }
+    .btn-gold {
+      background: var(--grad-gold); color: var(--ink);
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.35);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-ink {
+      background: var(--ink); color: var(--white);
+      box-shadow: var(--shadow-card);
+    }
+    .btn-ink:hover { background: var(--ink-soft); transform: translateY(-2px); }
+
+    .btn-lg { padding: 16px 36px; font-size: 1.05rem; }
+
+    /* CTA flutuante */
+    .cta-float {
+      position: fixed; bottom: 100px; right: 24px;
+      z-index: var(--z-chat);
+      background: var(--grad-gold);
+      color: var(--ink); font-weight: 700; font-size: 0.85rem;
+      padding: 12px 20px; border-radius: var(--r-full);
+      box-shadow: 0 6px 24px rgba(201,168,76,0.45);
+      transition: all var(--t-base);
+      display: flex; align-items: center; gap: var(--s1);
+    }
+    .cta-float:hover { transform: translateY(-3px) scale(1.04); }
+
+    /* ================================================ */
+    /* SKIP LINK — ACESSIBILIDADE                       */
+    /* ================================================ */
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--gold); color: var(--ink);
+      padding: 8px 16px; border-radius: 0 0 var(--r-sm) 0;
+      font-weight: 700; z-index: 1000;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ================================================ */
+    /* HEADER / NAV                                     */
+    /* ================================================ */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: var(--z-nav);
+      background: rgba(10,14,26,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: all var(--t-base);
+    }
+    .header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+
+    .nav {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.2rem; font-weight: 800;
+      color: var(--white);
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--grad-gold);
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: var(--s4);
+    }
+    .nav-link {
+      font-size: 0.88rem; font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      transition: color var(--t-fast);
+      position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--gold);
+      transition: width var(--t-base);
+    }
+    .nav-link:hover { color: var(--white); }
+    .nav-link:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 9px 20px; font-size: 0.88rem;
+      background: var(--grad-gold); color: var(--ink); font-weight: 700;
+      border-radius: var(--r-sm);
+      transition: all var(--t-base);
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      padding: var(--s1); cursor: pointer;
+    }
+    .menu-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all var(--t-base);
+    }
+    .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ================================================ */
+    /* HERO                                             */
+    /* ================================================ */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--grad-hero);
+      overflow: hidden; padding-top: 70px;
+    }
+
+    /* Grade de fundo estilo circuito */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Brilho dourado */
+    .hero-glow {
+      position: absolute;
+      top: 20%; right: -5%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: breathe 7s ease-in-out infinite;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -10%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(14,60,100,0.4) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: breathe 9s ease-in-out infinite reverse;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s6); align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--s1);
+      padding: 8px 16px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: var(--r-full);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--gold-lt); text-transform: uppercase;
+      margin-bottom: var(--s3);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white);
+      margin-bottom: var(--s3);
+    }
+    .hero-title em {
+      font-style: normal;
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.08rem; line-height: 1.85;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: var(--s4);
+      max-width: 520px;
+    }
+
+    .hero-btns { display: flex; gap: var(--s2); flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex; gap: var(--s4);
+      margin-top: var(--s5);
+      padding-top: var(--s4);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 800;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-lbl {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    /* Painel visual direito */
+    .hero-visual {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+    }
+
+    .hero-orb {
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 40%, rgba(201,168,76,0.18) 0%, rgba(14,40,80,0.6) 60%);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: orb-spin 20s linear infinite;
+    }
+    @keyframes orb-spin {
+      from { box-shadow: 0 0 60px rgba(201,168,76,0.1); }
+      50%  { box-shadow: 0 0 100px rgba(201,168,76,0.25); }
+      to   { box-shadow: 0 0 60px rgba(201,168,76,0.1); }
+    }
+
+    .hero-orb-icon { font-size: 7rem; filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+
+    .orb-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      animation: ring-pulse 4s ease-in-out infinite;
+    }
+    .orb-ring:nth-child(1) { width: 380px; height: 380px; animation-delay: 0s; }
+    .orb-ring:nth-child(2) { width: 440px; height: 440px; animation-delay: 0.8s; }
+    .orb-ring:nth-child(3) { width: 500px; height: 500px; animation-delay: 1.6s; }
+
+    @keyframes ring-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 0.7; transform: scale(1.02); }
+    }
+
+    /* Floating cards no visual */
+    .float-card {
+      position: absolute;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; color: var(--white);
+      animation: float-card 5s ease-in-out infinite;
+      white-space: nowrap;
+    }
+    .float-card--1 { top: 10%; left: -10%; animation-delay: 0s; }
+    .float-card--2 { bottom: 15%; right: -8%; animation-delay: 1.5s; }
+    .float-card--3 { top: 50%; left: -15%; animation-delay: 3s; }
+    @keyframes float-card {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .float-card-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--success); flex-shrink: 0;
+    }
+    .float-card-dot--gold { background: var(--gold); }
+
+    /* ================================================ */
+    /* SEÇÃO PILARES / ÉTICA                            */
+    /* ================================================ */
+    .pillar-card {
+      background: var(--white);
+      border: 1px solid var(--ice-2);
+      border-radius: var(--r-lg);
+      padding: var(--s4);
+      transition: all var(--t-slow);
+      position: relative; overflow: hidden;
+    }
+    .pillar-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--grad-gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--t-slow);
+    }
+    .pillar-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+    .pillar-card:hover::before { transform: scaleX(1); }
+
+    .pillar-icon {
+      width: 60px; height: 60px;
+      background: var(--ink);
+      border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem;
+      margin-bottom: var(--s3);
+    }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--ink); margin-bottom: var(--s1);
+    }
+    .pillar-text { font-size: 0.93rem; color: var(--muted); line-height: 1.75; }
+
+    /* ================================================ */
+    /* SEÇÃO TRANSPARÊNCIA — DARK                       */
+    /* ================================================ */
+    .transp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s3);
+    }
+
+    .transp-card {
+      background: var(--grad-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r-lg);
+      padding: var(--s4);
+      transition: all var(--t-base);
+    }
+    .transp-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.04);
+    }
+    .transp-card-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 800;
+      color: rgba(201,168,76,0.2);
+      line-height: 1; margin-bottom: var(--s1);
+    }
+    .transp-card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); margin-bottom: var(--s1);
+    }
+    .transp-card-text { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+    /* ================================================ */
+    /* SEÇÃO LEGISLAÇÃO — LGPD / AI ACT                 */
+    /* ================================================ */
+    .leg-tabs {
+      display: flex; gap: var(--s2); margin-bottom: var(--s4);
+      border-bottom: 1px solid var(--ice-2);
+      padding-bottom: var(--s2);
+    }
+    .leg-tab {
+      padding: 8px 20px;
+      border-radius: var(--r-full);
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: all var(--t-fast);
+      color: var(--muted); background: transparent;
+      border: 1.5px solid transparent;
+    }
+    .leg-tab.active {
+      background: var(--ink); color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .leg-panel { display: none; }
+    .leg-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); align-items: start; }
+
+    .leg-info-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--ink); margin-bottom: var(--s2);
+    }
+    .leg-info-subtitle {
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--gold); text-transform: uppercase;
+      letter-spacing: 0.07em; margin-bottom: var(--s1);
+    }
+    .leg-info-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: var(--s3); }
+
+    .leg-points { display: flex; flex-direction: column; gap: var(--s2); }
+    .leg-point {
+      display: flex; gap: var(--s2); align-items: flex-start;
+      padding: var(--s2) var(--s3);
+      background: var(--ice);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--gold);
+    }
+    .leg-point-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .leg-point-text { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
+    .leg-point-text strong { color: var(--ink); }
+
+    /* Timeline legislativa */
+    .leg-timeline { display: flex; flex-direction: column; gap: var(--s3); }
+    .timeline-step {
+      display: flex; gap: var(--s3); align-items: flex-start;
+    }
+    .timeline-step-year {
+      font-family: var(--font-display);
+      font-size: 0.85rem; font-weight: 800;
+      color: var(--gold); min-width: 50px;
+      padding-top: 3px;
+    }
+    .timeline-step-line {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .timeline-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    .timeline-bar {
+      width: 2px; flex: 1; background: var(--ice-2);
+      min-height: 40px;
+    }
+    .timeline-step-content { padding-bottom: var(--s2); }
+    .timeline-step-title { font-weight: 600; color: var(--ink); font-size: 0.93rem; }
+    .timeline-step-desc { font-size: 0.85rem; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+
+    /* ================================================ */
+    /* SEÇÃO RESPONSABILIDADE — DARK                    */
+    /* ================================================ */
+    .resp-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s3);
+    }
+    .resp-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--r-lg);
+      padding: var(--s4);
+      transition: all var(--t-base);
+      text-align: center;
+    }
+    .resp-card:hover {
+      background: rgba(201,168,76,0.06);
+      border-color: rgba(201,168,76,0.25);
+      transform: translateY(-4px);
+    }
+    .resp-card-icon { font-size: 2.5rem; margin-bottom: var(--s2); }
+    .resp-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: var(--s1);
+    }
+    .resp-card-text { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ================================================ */
+    /* QUIZ INTERATIVO                                  */
+    /* ================================================ */
+    .quiz-wrap {
+      background: var(--ink-mid);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--r-xl);
+      padding: var(--s5);
+      max-width: 740px; margin: 0 auto;
+    }
+    .quiz-progress {
+      height: 4px; background: rgba(255,255,255,0.08);
+      border-radius: var(--r-full); margin-bottom: var(--s4); overflow: hidden;
+    }
+    .quiz-progress-bar {
+      height: 100%; background: var(--grad-gold);
+      border-radius: var(--r-full);
+      transition: width 0.5s ease;
+    }
+    .quiz-counter {
+      font-size: 0.82rem; color: var(--muted);
+      margin-bottom: var(--s2);
+    }
+    .quiz-question {
+      font-family: var(--font-display);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--white); margin-bottom: var(--s3);
+      line-height: 1.4;
+    }
+    .quiz-options { display: flex; flex-direction: column; gap: var(--s2); }
+    .quiz-option {
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-md);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.93rem;
+      cursor: pointer; text-align: left;
+      transition: all var(--t-fast);
+    }
+    .quiz-option:hover { border-color: var(--gold); color: var(--white); background: rgba(201,168,76,0.06); }
+    .quiz-option.correct { border-color: var(--success); background: rgba(46,204,135,0.1); color: var(--success); }
+    .quiz-option.wrong   { border-color: var(--danger); background: rgba(224,82,82,0.1); color: var(--danger); }
+
+    .quiz-feedback {
+      margin-top: var(--s3);
+      padding: var(--s2) var(--s3);
+      border-radius: var(--r-md);
+      font-size: 0.9rem; line-height: 1.6;
+      display: none;
+    }
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.correct { background: rgba(46,204,135,0.1); color: var(--success); border: 1px solid rgba(46,204,135,0.2); }
+    .quiz-feedback.wrong   { background: rgba(224,82,82,0.1); color: #f08080; border: 1px solid rgba(224,82,82,0.2); }
+
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: var(--s3); }
+
+    .quiz-result {
+      text-align: center; display: none;
+    }
+    .quiz-result.show { display: block; }
+    .quiz-score {
+      font-family: var(--font-display);
+      font-size: 4rem; font-weight: 800;
+      color: var(--gold);
+    }
+    .quiz-score-label { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: var(--s1); }
+
+    /* ================================================ */
+    /* CHATBOT COM IA                                   */
+    /* ================================================ */
+    .chat-btn {
+      position: fixed; bottom: 24px; right: 24px;
+      z-index: var(--z-chat);
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--grad-gold);
+      color: var(--ink); font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(201,168,76,0.45);
+      transition: all var(--t-base); cursor: pointer;
+      border: none;
+    }
+    .chat-btn:hover { transform: scale(1.1); box-shadow: var(--shadow-gold); }
+    .chat-btn .badge {
+      position: absolute; top: -4px; right: -4px;
+      width: 18px; height: 18px; background: var(--danger);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; color: var(--white);
+    }
+
+    .chat-window {
+      position: fixed; bottom: 96px; right: 24px;
+      z-index: var(--z-chat);
+      width: 370px; max-height: 520px;
+      background: var(--ink-mid);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-lg);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transform: translateY(20px) scale(0.95); opacity: 0;
+      pointer-events: none;
+      transition: all var(--t-slow);
+    }
+    .chat-window.open {
+      transform: translateY(0) scale(1); opacity: 1;
+      pointer-events: auto;
+    }
+
+    .chat-header {
+      background: rgba(201,168,76,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .chat-header-info { flex: 1; }
+    .chat-header-name { font-weight: 700; color: var(--white); font-size: 0.93rem; }
+    .chat-header-status { font-size: 0.76rem; color: var(--success); display: flex; align-items: center; gap: 5px; }
+    .chat-header-status::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+    .chat-close { font-size: 1.3rem; color: var(--muted); cursor: pointer; transition: color var(--t-fast); background: none; border: none; padding: 4px; }
+    .chat-close:hover { color: var(--white); }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: var(--s3);
+      display: flex; flex-direction: column; gap: var(--s2);
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
+    }
+
+    .msg {
+      max-width: 85%; font-size: 0.87rem; line-height: 1.6;
+      padding: 10px 14px; border-radius: var(--r-md);
+    }
+    .msg-bot {
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85);
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .msg-user {
+      background: var(--grad-gold); color: var(--ink); font-weight: 500;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .msg-typing {
+      display: flex; gap: 4px; align-items: center;
+      padding: 12px 14px;
+    }
+    .msg-typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--muted);
+      animation: typing 1.2s ease infinite;
+    }
+    .msg-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .msg-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); background: var(--gold); } }
+
+    .chat-suggestions {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 0 var(--s3) var(--s2);
+    }
+    .chat-sug {
+      padding: 5px 12px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-full); color: rgba(255,255,255,0.65);
+      font-size: 0.78rem; cursor: pointer;
+      transition: all var(--t-fast);
+    }
+    .chat-sug:hover { border-color: var(--gold); color: var(--gold-lt); }
+
+    .chat-input-row {
+      padding: var(--s2) var(--s3);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: var(--s1);
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-full);
+      padding: 9px 16px; color: var(--white);
+      font-size: 0.88rem;
+      transition: border-color var(--t-fast);
+    }
+    .chat-input::placeholder { color: var(--muted); }
+    .chat-input:focus { outline: none; border-color: var(--gold); }
+    .chat-send {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--grad-gold); color: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+      border: none; cursor: pointer;
+      transition: all var(--t-fast);
+    }
+    .chat-send:hover { transform: scale(1.1); }
+
+    /* ================================================ */
+    /* SEÇÃO CONTATO                                    */
+    /* ================================================ */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--s6); align-items: start; }
+
+    .contact-info-item {
+      display: flex; gap: var(--s2); margin-bottom: var(--s3);
+    }
+    .contact-info-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .contact-info-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .contact-info-val { font-weight: 600; color: var(--ink); margin-top: 2px; }
+
+    .form-group { margin-bottom: var(--s3); }
+    .form-label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--ink-soft); margin-bottom: 6px;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 12px 16px;
+      background: var(--white);
+      border: 1.5px solid var(--ice-2);
+      border-radius: var(--r-md);
+      font-size: 0.93rem; color: var(--ink);
+      transition: border-color var(--t-fast);
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+
+    .form-lgpd {
+      font-size: 0.82rem; color: var(--muted);
+      background: var(--ice); border-radius: var(--r-sm);
+      padding: 12px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: var(--s3);
+    }
+    .form-lgpd input[type=checkbox] { margin-top: 3px; accent-color: var(--gold); }
+
+    .form-success {
+      background: rgba(46,204,135,0.1); border: 1px solid rgba(46,204,135,0.3);
+      border-radius: var(--r-md); padding: var(--s3);
+      text-align: center; color: var(--success);
+      display: none;
+    }
+    .form-success.show { display: block; }
+
+    /* ================================================ */
+    /* FOOTER                                           */
+    /* ================================================ */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      padding: var(--s6) 0 var(--s3);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--s5); margin-bottom: var(--s5);
+    }
+    .footer-brand-name {
+      font-family: var(--font-display); font-size: 1.2rem;
+      font-weight: 800; color: var(--white);
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: var(--s2);
+    }
+    .footer-brand-desc { font-size: 0.88rem; line-height: 1.75; max-width: 280px; }
+    .footer-col-title {
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--white); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: var(--s2);
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-link {
+      font-size: 0.87rem;
+      transition: color var(--t-fast);
+    }
+    .footer-link:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: var(--s3);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--s2);
+      font-size: 0.82rem;
+    }
+    .footer-social { display: flex; gap: var(--s1); }
+    .footer-soc-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: all var(--t-fast);
+    }
+    .footer-soc-link:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+    /* ================================================ */
+    /* PROVA SOCIAL                                     */
+    /* ================================================ */
+    .social-proof {
+      padding: var(--s5) 0;
+      background: var(--white);
+      border-top: 1px solid var(--ice-2);
+      border-bottom: 1px solid var(--ice-2);
+    }
+    .social-proof-label {
+      text-align: center;
+      font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: var(--s4);
+    }
+    .social-proof-logos {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+      gap: var(--s4);
+    }
+    .proof-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px;
+      border: 1.5px solid var(--ice-2);
+      border-radius: var(--r-full);
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--ink-soft);
+      transition: all var(--t-base);
+      white-space: nowrap;
+    }
+    .proof-badge:hover { border-color: var(--gold); color: var(--ink); transform: translateY(-2px); }
+    .proof-badge-icon { font-size: 1.2rem; }
+
+    /* Depoimentos */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s3);
+    }
+    .testimonial-card {
+      background: var(--ice);
+      border: 1px solid var(--ice-2);
+      border-radius: var(--r-lg);
+      padding: var(--s3) var(--s4);
+      transition: all var(--t-base);
+    }
+    .testimonial-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); box-shadow: var(--shadow-card); }
+    .testimonial-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: var(--s2); letter-spacing: 2px; }
+    .testimonial-text { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: var(--s2); font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .testimonial-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .testimonial-name { font-weight: 700; font-size: 0.88rem; color: var(--ink); }
+    .testimonial-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ================================================ */
+    /* ERRO INLINE FORMULÁRIO                           */
+    /* ================================================ */
+    .field-error {
+      font-size: 0.78rem; color: var(--danger);
+      margin-top: 4px; display: none;
+    }
+    .field-error.show { display: block; }
+    .form-input.error, .form-textarea.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(224,82,82,0.1);
+    }
+    .form-input.valid, .form-textarea.valid {
+      border-color: var(--success);
+    }
+
+    /* ================================================ */
+    /* FADE IN — SCROLL ANIMATION                       */
+    /* ================================================ */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Stagger delays */
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* ================================================ */
+    /* RESPONSIVIDADE                                   */
+    /* ================================================ */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: var(--s4); }
+      .hero-visual { display: none; }
+      .leg-panel.active { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .resp-cards { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      :root { --s7: 4rem; --s6: 3rem; }
+
+      .menu-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 70px; left: 0; right: 0;
+        background: rgba(10,14,26,0.97);
+        flex-direction: column; gap: 0;
+        transform: translateY(-110%); opacity: 0; visibility: hidden;
+        transition: all var(--t-slow);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: var(--s2) 0;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; visibility: visible; }
+      .nav-link { padding: 14px 24px; width: 100%; font-size: 1rem; }
+      .nav-cta { display: none; }
+
+      .transp-grid { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .resp-cards { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-stats { flex-wrap: wrap; gap: var(--s3); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .social-proof-logos { flex-direction: column; align-items: flex-start; gap: var(--s2); padding: 0 var(--s2); }
+
+      .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 90px; }
+    }
+
+    @media (max-width: 480px) {
+      .leg-tabs { flex-direction: column; }
+      .cta-float { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    @media (prefers-contrast: high) {
+      :root { --muted: #555; --ice-2: #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Acessibilidade: pular para conteúdo -->
+  <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+
+  <!-- ============================================ -->
+  <!-- HEADER / NAVEGAÇÃO FIXA                      -->
+  <!-- ============================================ -->
+  <header class="header" id="header" role="banner">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a href="#" class="logo" aria-label="Ética IA — Página inicial">
+        <div class="logo-mark" aria-hidden="true">⚖️</div>
+        <span>Ética<span>IA</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#etica"           class="nav-link" role="menuitem">Ética em IA</a></li>
+        <li role="none"><a href="#transparencia"   class="nav-link" role="menuitem">Transparência</a></li>
+        <li role="none"><a href="#legislacao"      class="nav-link" role="menuitem">Legislação</a></li>
+        <li role="none"><a href="#responsabilidade" class="nav-link" role="menuitem">Responsabilidade</a></li>
+        <li role="none"><a href="#quiz"            class="nav-link" role="menuitem">Quiz</a></li>
+        <li role="none"><a href="#contato"         class="nav-link" role="menuitem">Contato</a></li>
+        <li role="none"><a href="#contato"         class="nav-cta">Fale Conosco</a></li>
+      </ul>
+
+      <div style="display:flex; align-items:center; gap:var(--s1)">
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro/claro" title="Alternar tema">🌙</button>
+        <button class="menu-toggle" id="menuToggle"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================ -->
+    <!-- HERO                                         -->
+    <!-- ============================================ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow"  aria-hidden="true"></div>
+      <div class="hero-glow-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero-inner">
+          <!-- Conteúdo -->
+          <div class="hero-content">
+            <div class="hero-badge" aria-hidden="true">
+              🌐 &nbsp; Portal de Conscientização Digital
+            </div>
+
+            <!-- H1 — único, otimizado para SEO -->
+            <h1 class="hero-title" id="hero-title">
+              IA com <em>Ética</em>,<br>Governança<br>com Propósito
+            </h1>
+
+            <p class="hero-desc">
+              Entenda os princípios que garantem o uso responsável da Inteligência Artificial —
+              da transparência algorítmica à conformidade com a LGPD e o EU AI Act.
+              O futuro digital começa com responsabilidade.
+            </p>
+
+            <div class="hero-btns">
+              <a href="#etica" class="btn btn-gold btn-lg">Explorar conteúdo</a>
+              <a href="#quiz" class="btn btn-outline btn-lg">Fazer o Quiz</a>
+            </div>
+
+            <div class="hero-stats" aria-label="Números do portal">
+              <div>
+                <span class="stat-val">127+</span>
+                <span class="stat-lbl">países com regulação em IA</span>
+              </div>
+              <div>
+                <span class="stat-val">2024</span>
+                <span class="stat-lbl">EU AI Act aprovado</span>
+              </div>
+              <div>
+                <span class="stat-val">LGPD</span>
+                <span class="stat-lbl">Lei geral de proteção</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual decorativo -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orb-ring"></div>
+            <div class="orb-ring"></div>
+            <div class="orb-ring"></div>
+            <div class="hero-orb">
+              <span class="hero-orb-icon">⚖️</span>
+            </div>
+            <div class="float-card float-card--1">
+              <div class="float-card-dot"></div>
+              Transparência Algorítmica
+            </div>
+            <div class="float-card float-card--2">
+              <div class="float-card-dot float-card-dot--gold"></div>
+              LGPD em conformidade
+            </div>
+            <div class="float-card float-card--3">
+              <div class="float-card-dot"></div>
+              EU AI Act 2024
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROVA SOCIAL — PARCEIROS & DEPOIMENTOS        -->
+    <!-- ============================================ -->
+    <div class="social-proof" aria-label="Instituições de referência">
+      <div class="container">
+        <p class="social-proof-label">Baseado em referências de</p>
+        <div class="social-proof-logos">
+          <div class="proof-badge"><span class="proof-badge-icon">🇧🇷</span> ANPD — Autoridade Nacional de Proteção de Dados</div>
+          <div class="proof-badge"><span class="proof-badge-icon">🇪🇺</span> European AI Office</div>
+          <div class="proof-badge"><span class="proof-badge-icon">🌐</span> UNESCO — Recomendação sobre IA</div>
+          <div class="proof-badge"><span class="proof-badge-icon">📐</span> OECD AI Principles</div>
+          <div class="proof-badge"><span class="proof-badge-icon">⚖️</span> IEEE Ethically Aligned Design</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DEPOIMENTOS                                  -->
+    <!-- ============================================ -->
+    <section class="section section--ice" aria-labelledby="depoimentos-title">
+      <div class="container">
+        <header style="text-align:center; max-width:580px; margin:0 auto var(--s5)">
+          <div class="section-tag">💬 Depoimentos</div>
+          <h2 class="section-title section-title--dark" id="depoimentos-title">
+            O que dizem sobre o portal
+          </h2>
+        </header>
+        <div class="testimonials-grid" role="list">
+          <article class="testimonial-card reveal reveal-d1" role="listitem">
+            <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
+            <p class="testimonial-text">"Conteúdo didático e atualizado. Consegui entender a LGPD em menos de uma hora e aplicar no meu TCC sobre sistemas de informação."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">👩</div>
+              <div>
+                <p class="testimonial-name">Ana Beatriz S.</p>
+                <p class="testimonial-role">Estudante de Sistemas de Informação · UFPA</p>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal reveal-d2" role="listitem">
+            <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
+            <p class="testimonial-text">"O quiz me revelou lacunas que eu tinha sobre o EU AI Act. Material excelente para quem atua na área de conformidade corporativa."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">👨</div>
+              <div>
+                <p class="testimonial-name">Carlos Eduardo M.</p>
+                <p class="testimonial-role">Analista de Compliance · Fintech Belém</p>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal reveal-d3" role="listitem">
+            <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
+            <p class="testimonial-text">"O assistente de IA integrado é impressionante. Consegui respostas precisas sobre responsabilidade algoritmica em tempo real."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">👩‍💻</div>
+              <div>
+                <p class="testimonial-name">Priscila T.</p>
+                <p class="testimonial-role">Professora de Direito Digital · EETEPA</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PILARES DE ÉTICA EM IA                       -->
+    <!-- ============================================ -->
+    <section id="etica" class="section section--ice" aria-labelledby="etica-title">
+      <div class="container">
+        <header class="reveal" style="max-width:640px; margin-bottom: var(--s5)">
+          <div class="section-tag">⚖️ Fundamentos</div>
+          <h2 class="section-title section-title--dark" id="etica-title">
+            Os 6 Pilares da Ética em Inteligência Artificial
+          </h2>
+          <p class="section-desc">
+            Sistemas de IA devem ser projetados e operados segundo princípios éticos claros,
+            garantindo justiça, segurança e respeito aos direitos humanos.
+          </p>
+        </header>
+
+        <div class="grid grid-3" role="list">
+          <article class="pillar-card reveal reveal-d1" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">🔍</div>
+            <h3 class="pillar-title">Transparência</h3>
+            <p class="pillar-text">
+              Sistemas de IA devem ser explicáveis. Usuários e partes afetadas têm o direito
+              de compreender como as decisões são tomadas e quais dados são utilizados.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal reveal-d2" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">⚖️</div>
+            <h3 class="pillar-title">Equidade e Justiça</h3>
+            <p class="pillar-text">
+              Algoritmos não devem perpetuar ou amplificar preconceitos. Dados de treinamento
+              e modelos devem ser auditados continuamente para eliminar vieses sistêmicos.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal reveal-d3" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">🛡️</div>
+            <h3 class="pillar-title">Privacidade e Segurança</h3>
+            <p class="pillar-text">
+              Coleta e tratamento de dados pessoais devem respeitar a privacidade dos indivíduos,
+              aplicando princípios como minimização, anonimização e consentimento informado.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal reveal-d1" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">👤</div>
+            <h3 class="pillar-title">Autonomia Humana</h3>
+            <p class="pillar-text">
+              Decisões críticas que afetam pessoas — contratação, crédito, saúde — devem
+              sempre preservar a possibilidade de revisão e intervenção humana significativa.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal reveal-d2" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">🏛️</div>
+            <h3 class="pillar-title">Responsabilidade</h3>
+            <p class="pillar-text">
+              Desenvolvedores, empresas e governos devem assumir responsabilidade pelos
+              impactos de sistemas de IA, incluindo mecanismos de reparação de danos.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal reveal-d3" role="listitem">
+            <div class="pillar-icon" aria-hidden="true">🌍</div>
+            <h3 class="pillar-title">Benefício Social</h3>
+            <p class="pillar-text">
+              A IA deve ser desenvolvida para beneficiar a sociedade como um todo,
+              não apenas grupos privilegiados, promovendo inclusão e desenvolvimento sustentável.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TRANSPARÊNCIA ALGORÍTMICA — DARK             -->
+    <!-- ============================================ -->
+    <section id="transparencia" class="section section--dark" aria-labelledby="transp-title">
+      <div class="container">
+        <header class="reveal" style="max-width:640px; margin-bottom: var(--s5)">
+          <div class="section-tag">🔍 Transparência</div>
+          <h2 class="section-title section-title--light" id="transp-title">
+            Transparência Algorítmica na Prática
+          </h2>
+          <p class="section-desc section-desc--light">
+            A opacidade dos algoritmos é um dos maiores riscos à democracia e aos direitos
+            individuais. Entenda o que significa tornar a IA verdadeiramente explicável.
+          </p>
+        </header>
+
+        <div class="transp-grid" role="list">
+          <article class="transp-card reveal reveal-d1" role="listitem">
+            <div class="transp-card-num" aria-hidden="true">01</div>
+            <h3 class="transp-card-title">Explicabilidade (XAI)</h3>
+            <p class="transp-card-text">
+              O modelo deve ser capaz de justificar suas decisões em linguagem compreensível.
+              Técnicas como LIME e SHAP tornam modelos complexos interpretáveis para humanos.
+            </p>
+          </article>
+
+          <article class="transp-card reveal reveal-d2" role="listitem">
+            <div class="transp-card-num" aria-hidden="true">02</div>
+            <h3 class="transp-card-title">Rastreabilidade</h3>
+            <p class="transp-card-text">
+              Cada decisão de um sistema de IA deve ser registrada (logs auditáveis), permitindo
+              que autoridades e afetados rastreiem como e quando determinada ação ocorreu.
+            </p>
+          </article>
+
+          <article class="transp-card reveal reveal-d3" role="listitem">
+            <div class="transp-card-num" aria-hidden="true">03</div>
+            <h3 class="transp-card-title">Documentação de Modelos</h3>
+            <p class="transp-card-text">
+              Model Cards e Datasheets for Datasets são práticas que documentam o propósito,
+              limitações, dados usados e métricas de desempenho de sistemas de IA.
+            </p>
+          </article>
+
+          <article class="transp-card reveal reveal-d4" role="listitem">
+            <div class="transp-card-num" aria-hidden="true">04</div>
+            <h3 class="transp-card-title">Auditoria Independente</h3>
+            <p class="transp-card-text">
+              Terceiros independentes devem poder auditar sistemas de IA de alto risco,
+              verificando conformidade com normas éticas e legais antes e durante a operação.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- LEGISLAÇÃO — LGPD / AI ACT                   -->
+    <!-- ============================================ -->
+    <section id="legislacao" class="section" aria-labelledby="leg-title">
+      <div class="container">
+        <header class="reveal" style="max-width:640px; margin-bottom: var(--s4)">
+          <div class="section-tag">📜 Legislação</div>
+          <h2 class="section-title section-title--dark" id="leg-title">
+            LGPD e EU AI Act: as leis que regulam a IA
+          </h2>
+          <p class="section-desc">
+            Duas legislações fundamentais moldam o futuro da governança de dados e IA
+            no Brasil e na Europa — entenda suas diferenças e o que elas exigem.
+          </p>
+        </header>
+
+        <!-- Tabs -->
+        <div class="leg-tabs reveal" role="tablist" aria-label="Selecionar legislação">
+          <button class="leg-tab active" role="tab" aria-selected="true"
+            aria-controls="panel-lgpd" id="tab-lgpd" data-tab="lgpd">
+            🇧🇷 LGPD
+          </button>
+          <button class="leg-tab" role="tab" aria-selected="false"
+            aria-controls="panel-aiact" id="tab-aiact" data-tab="aiact">
+            🇪🇺 EU AI Act
+          </button>
+          <button class="leg-tab" role="tab" aria-selected="false"
+            aria-controls="panel-comp" id="tab-comp" data-tab="comp">
+            ⚖️ Comparativo
+          </button>
+        </div>
+
+        <!-- Painel LGPD -->
+        <div class="leg-panel active reveal" id="panel-lgpd" role="tabpanel" aria-labelledby="tab-lgpd">
+          <div>
+            <p class="leg-info-subtitle">Lei nº 13.709/2018</p>
+            <h3 class="leg-info-title">Lei Geral de Proteção de Dados</h3>
+            <p class="leg-info-desc">
+              A LGPD regula o tratamento de dados pessoais no Brasil, estabelecendo
+              direitos para titulares e obrigações para organizações que processam dados.
+              Entrou em vigor em setembro de 2020 e é fiscalizada pela ANPD.
+            </p>
+            <div class="leg-points">
+              <div class="leg-point">
+                <span class="leg-point-icon">✅</span>
+                <p class="leg-point-text"><strong>Consentimento explícito:</strong> dados pessoais só podem ser processados com consentimento claro e informado do titular.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">🎯</span>
+                <p class="leg-point-text"><strong>Finalidade específica:</strong> cada dado coletado deve ter uma finalidade declarada e não pode ser usado para fins incompatíveis.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">🔒</span>
+                <p class="leg-point-text"><strong>Segurança obrigatória:</strong> organizações devem adotar medidas técnicas e administrativas para proteger dados de acessos não autorizados.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">📋</span>
+                <p class="leg-point-text"><strong>DPO (Encarregado):</strong> empresas de médio e grande porte devem nomear um responsável pelo tratamento de dados pessoais.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="section-title section-title--dark" style="font-size:1.2rem; margin-bottom: var(--s3)">
+              Linha do tempo da LGPD
+            </h3>
+            <div class="leg-timeline">
+              <div class="timeline-step">
+                <span class="timeline-step-year">2018</span>
+                <div class="timeline-step-line">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-bar"></div>
+                </div>
+                <div class="timeline-step-content">
+                  <p class="timeline-step-title">Sanção da Lei nº 13.709</p>
+                  <p class="timeline-step-desc">Lei aprovada, baseada no GDPR europeu.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-step-year">2020</span>
+                <div class="timeline-step-line">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-bar"></div>
+                </div>
+                <div class="timeline-step-content">
+                  <p class="timeline-step-title">Vigência e ANPD criada</p>
+                  <p class="timeline-step-desc">Autoridade Nacional de Proteção de Dados é instituída.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-step-year">2021</span>
+                <div class="timeline-step-line">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-bar"></div>
+                </div>
+                <div class="timeline-step-content">
+                  <p class="timeline-step-title">Sanções ativas</p>
+                  <p class="timeline-step-desc">ANPD começa a aplicar multas de até 2% do faturamento.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-step-year">2023+</span>
+                <div class="timeline-step-line">
+                  <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-step-content">
+                  <p class="timeline-step-title">Regulamentações setoriais</p>
+                  <p class="timeline-step-desc">Normas específicas para saúde, finanças e IA em desenvolvimento.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel AI Act -->
+        <div class="leg-panel" id="panel-aiact" role="tabpanel" aria-labelledby="tab-aiact">
+          <div>
+            <p class="leg-info-subtitle">Regulamento UE 2024/1689</p>
+            <h3 class="leg-info-title">EU Artificial Intelligence Act</h3>
+            <p class="leg-info-desc">
+              O AI Act europeu é o primeiro marco regulatório abrangente para Inteligência Artificial
+              no mundo, adotando uma abordagem de risco para classificar e regular sistemas de IA.
+              Aprovado em 2024 e com implementação gradual até 2027.
+            </p>
+            <div class="leg-points">
+              <div class="leg-point">
+                <span class="leg-point-icon">🚫</span>
+                <p class="leg-point-text"><strong>IA proibida:</strong> sistemas de vigilância em massa, scoring social e manipulação subliminar são expressamente vedados.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">⚠️</span>
+                <p class="leg-point-text"><strong>Alto risco:</strong> IA em saúde, transporte, infraestrutura crítica e decisões jurídicas exige avaliação de conformidade prévia.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">📄</span>
+                <p class="leg-point-text"><strong>Transparência:</strong> IA que interage com humanos deve se identificar como tal; deepfakes devem ser rotulados.</p>
+              </div>
+              <div class="leg-point">
+                <span class="leg-point-icon">💰</span>
+                <p class="leg-point-text"><strong>Multas pesadas:</strong> até €35 milhões ou 7% do faturamento global por violações graves.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="section-title section-title--dark" style="font-size:1.2rem; margin-bottom: var(--s3)">
+              Pirâmide de Risco do AI Act
+            </h3>
+            <div style="display:flex; flex-direction:column; gap: var(--s2)">
+              <div style="background:#e05252; border-radius:var(--r-md); padding:16px 20px; text-align:center; color:white; font-weight:700; font-size:0.93rem">
+                🚫 IA Proibida — Risco Inaceitável<br>
+                <span style="font-weight:400; font-size:0.82rem; opacity:0.85">Vigilância em massa, manipulação cognitiva</span>
+              </div>
+              <div style="background:#f59e0b; border-radius:var(--r-md); padding:16px 20px; text-align:center; color:white; font-weight:700; font-size:0.93rem">
+                ⚠️ Alto Risco — Avaliação obrigatória<br>
+                <span style="font-weight:400; font-size:0.82rem; opacity:0.9">Saúde, transporte, justiça, emprego</span>
+              </div>
+              <div style="background:#3b82f6; border-radius:var(--r-md); padding:16px 20px; text-align:center; color:white; font-weight:700; font-size:0.93rem">
+                📄 Risco Limitado — Obrigações de transparência<br>
+                <span style="font-weight:400; font-size:0.82rem; opacity:0.9">Chatbots, geração de conteúdo</span>
+              </div>
+              <div style="background:#2ecc87; border-radius:var(--r-md); padding:16px 20px; text-align:center; color:white; font-weight:700; font-size:0.93rem">
+                ✅ Risco Mínimo — Sem restrições<br>
+                <span style="font-weight:400; font-size:0.82rem; opacity:0.9">Filtros de spam, jogos, recomendações básicas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel Comparativo -->
+        <div class="leg-panel" id="panel-comp" role="tabpanel" aria-labelledby="tab-comp">
+          <div style="grid-column: 1 / -1">
+            <div style="overflow-x:auto">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem">
+                <caption style="font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:var(--s2); text-align:left">
+                  Comparativo: LGPD × EU AI Act
+                </caption>
+                <thead>
+                  <tr style="background:var(--ink); color:var(--white)">
+                    <th style="padding:14px 16px; text-align:left; border-radius:var(--r-sm) 0 0 var(--r-sm)">Aspecto</th>
+                    <th style="padding:14px 16px; text-align:center">🇧🇷 LGPD</th>
+                    <th style="padding:14px 16px; text-align:center; border-radius:0 var(--r-sm) var(--r-sm) 0">🇪🇺 EU AI Act</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--ice-2)">
+                    <td style="padding:13px 16px; font-weight:600; color:var(--ink)">Foco principal</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">Proteção de dados pessoais</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">Regulação de sistemas de IA</td>
+                  </tr>
+                  <tr style="background:var(--ice); border-bottom:1px solid var(--ice-2)">
+                    <td style="padding:13px 16px; font-weight:600; color:var(--ink)">Ano de vigência</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">2020</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">2024 (gradual até 2027)</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--ice-2)">
+                    <td style="padding:13px 16px; font-weight:600; color:var(--ink)">Órgão fiscalizador</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">ANPD (Brasil)</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">Comitê Europeu de IA</td>
+                  </tr>
+                  <tr style="background:var(--ice); border-bottom:1px solid var(--ice-2)">
+                    <td style="padding:13px 16px; font-weight:600; color:var(--ink)">Multa máxima</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">2% faturamento / R$50M por infração</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">€35M ou 7% faturamento global</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:13px 16px; font-weight:600; color:var(--ink)">Abordagem</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">Direitos dos titulares</td>
+                    <td style="padding:13px 16px; text-align:center; color:var(--muted)">Classificação por risco</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- RESPONSABILIDADE DIGITAL                     -->
+    <!-- ============================================ -->
+    <section id="responsabilidade" class="section section--ink" aria-labelledby="resp-title">
+      <div class="container">
+        <header class="reveal" style="max-width:640px; margin-bottom: var(--s5)">
+          <div class="section-tag">🏛️ Responsabilidade</div>
+          <h2 class="section-title section-title--light" id="resp-title">
+            Quem Responde pelos Erros da IA?
+          </h2>
+          <p class="section-desc section-desc--light">
+            A responsabilidade em IA é distribuída por toda a cadeia: de quem desenvolve
+            a quem usa. Conheça os papéis e deveres de cada ator.
+          </p>
+        </header>
+
+        <div class="resp-cards reveal" role="list">
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">💻</div>
+            <h3 class="resp-card-title">Desenvolvedores</h3>
+            <p class="resp-card-text">
+              Responsáveis pela qualidade dos dados de treinamento, escolhas de arquitetura
+              e documentação de limitações conhecidas do sistema.
+            </p>
+          </article>
+
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">🏢</div>
+            <h3 class="resp-card-title">Empresas</h3>
+            <p class="resp-card-text">
+              Devem garantir que sistemas de IA sejam auditados antes da implantação,
+              com políticas claras de uso e canais de reclamação para afetados.
+            </p>
+          </article>
+
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">🏛️</div>
+            <h3 class="resp-card-title">Governos</h3>
+            <p class="resp-card-text">
+              Criar e aplicar regulamentações, investir em capacidade técnica regulatória
+              e garantir que a IA pública sirva ao interesse coletivo.
+            </p>
+          </article>
+
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">👥</div>
+            <h3 class="resp-card-title">Usuários</h3>
+            <p class="resp-card-text">
+              Exercer o direito de acesso, retificação e exclusão de dados pessoais.
+              Reportar usos abusivos e exigir transparência das plataformas.
+            </p>
+          </article>
+
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">🎓</div>
+            <h3 class="resp-card-title">Academia</h3>
+            <p class="resp-card-text">
+              Pesquisar e publicar sobre riscos e impactos de sistemas de IA, formando
+              profissionais com consciência ética e multidisciplinar.
+            </p>
+          </article>
+
+          <article class="resp-card" role="listitem">
+            <div class="resp-card-icon" aria-hidden="true">🌐</div>
+            <h3 class="resp-card-title">Sociedade Civil</h3>
+            <p class="resp-card-text">
+              ONGs e grupos de defesa de direitos monitoram o uso de IA e pressionam
+              por maior accountability e participação da sociedade nas decisões.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- QUIZ INTERATIVO                              -->
+    <!-- ============================================ -->
+    <section id="quiz" class="section section--dark" aria-labelledby="quiz-title">
+      <div class="container">
+        <header class="reveal text-center" style="max-width:600px; margin: 0 auto var(--s5)">
+          <div class="section-tag">🧠 Quiz</div>
+          <h2 class="section-title section-title--light" id="quiz-title">
+            Teste seus Conhecimentos
+          </h2>
+          <p class="section-desc section-desc--light" style="margin: 0 auto">
+            Responda 5 perguntas sobre Ética e Governança em IA e descubra quanto você já sabe.
+          </p>
+        </header>
+
+        <div class="quiz-wrap reveal" role="main" aria-live="polite">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgress" style="width:0%"></div>
+          </div>
+          <p class="quiz-counter" id="quizCounter">Pergunta 1 de 5</p>
+
+          <div id="quizContent">
+            <p class="quiz-question" id="quizQuestion"></p>
+            <div class="quiz-options" id="quizOptions" role="list"></div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+            <div class="quiz-nav">
+              <span id="quizScore" style="color:var(--muted); font-size:0.88rem"></span>
+              <button class="btn btn-gold" id="quizNext" style="display:none">
+                Próxima →
+              </button>
+            </div>
+          </div>
+
+          <div class="quiz-result" id="quizResult">
+            <div style="font-size:3rem; margin-bottom:var(--s2)" aria-hidden="true">🎉</div>
+            <div class="quiz-score" id="quizFinalScore"></div>
+            <p class="quiz-score-label" id="quizFinalLabel"></p>
+            <button class="btn btn-gold" style="margin-top:var(--s3)" id="quizRestart">
+              Refazer Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTATO                                      -->
+    <!-- ============================================ -->
+    <section id="contato" class="section" aria-labelledby="contato-title">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Info lateral -->
+          <div class="reveal">
+            <div class="section-tag">📩 Contato</div>
+            <h2 class="section-title section-title--dark" id="contato-title">
+              Fale com<br>nossa equipe
+            </h2>
+            <p class="section-desc" style="margin-bottom:var(--s4)">
+              Tem dúvidas sobre ética em IA, LGPD ou quer colaborar com o portal?
+              Estamos aqui para ajudar.
+            </p>
+
+            <div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">📧</div>
+                <div>
+                  <p class="contact-info-label">E-mail</p>
+                  <p class="contact-info-val">contato@eticaia.com.br</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">📍</div>
+                <div>
+                  <p class="contact-info-label">Localização</p>
+                  <p class="contact-info-val">Belém, Pará — Brasil</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">⏰</div>
+                <div>
+                  <p class="contact-info-label">Resposta em</p>
+                  <p class="contact-info-val">Até 48 horas úteis</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulário -->
+          <div class="reveal reveal-d2">
+            <div style="background:var(--ice); border-radius:var(--r-xl); padding:var(--s4)">
+              <h3 style="font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--ink); margin-bottom:var(--s3)">
+                Envie sua mensagem
+              </h3>
+
+              <div id="formSuccess" class="form-success" role="alert">
+                ✅ Mensagem enviada com sucesso! Retornaremos em breve.
+              </div>
+
+              <div id="contactForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="nome">Nome completo *</label>
+                    <input class="form-input" type="text" id="nome" name="nome"
+                      placeholder="Seu nome" required autocomplete="name"
+                      aria-required="true" aria-describedby="nome-error">
+                    <span class="field-error" id="nome-error" role="alert">Por favor, informe seu nome completo.</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="email">E-mail *</label>
+                    <input class="form-input" type="email" id="email" name="email"
+                      placeholder="seu@email.com" required autocomplete="email"
+                      aria-required="true" aria-describedby="email-error">
+                    <span class="field-error" id="email-error" role="alert">Por favor, informe um e-mail válido.</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="assunto">Assunto</label>
+                  <select class="form-select" id="assunto" name="assunto">
+                    <option value="">Selecione um assunto</option>
+                    <option value="lgpd">Dúvida sobre LGPD</option>
+                    <option value="aiact">Dúvida sobre EU AI Act</option>
+                    <option value="transparencia">Transparência algorítmica</option>
+                    <option value="parceria">Proposta de parceria</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="mensagem">Mensagem *</label>
+                  <textarea class="form-textarea" id="mensagem" name="mensagem"
+                    placeholder="Escreva sua mensagem aqui..." required
+                    aria-required="true" aria-describedby="mensagem-error"></textarea>
+                  <span class="field-error" id="mensagem-error" role="alert">Por favor, escreva sua mensagem.</span>
+                </div>
+
+                <!-- Conformidade LGPD -->
+                <div class="form-lgpd" role="note" aria-label="Aviso de conformidade LGPD">
+                  <input type="checkbox" id="lgpdConsent" name="lgpdConsent" required aria-describedby="lgpd-error">
+                  <label for="lgpdConsent">
+                    <strong>Conformidade LGPD:</strong> Ao enviar este formulário, você consente
+                    com o tratamento dos seus dados pessoais conforme nossa Política de Privacidade,
+                    exclusivamente para responder à sua mensagem. Você pode solicitar exclusão a
+                    qualquer momento em contato@eticaia.com.br.
+                  </label>
+                </div>
+                <span class="field-error" id="lgpd-error" role="alert" style="margin-top:-var(--s2); margin-bottom:var(--s2)">Aceite os termos de conformidade LGPD para continuar.</span>
+
+                <button type="button" class="btn btn-ink btn-lg" id="submitBtn"
+                  style="width:100%" onclick="submitForm()">
+                  Enviar mensagem →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand-name">
+            <span style="background:var(--grad-gold); width:32px; height:32px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; font-size:1rem">⚖️</span>
+            ÉticaIA
+          </p>
+          <p class="footer-brand-desc">
+            Portal educativo dedicado à conscientização sobre Ética e Governança
+            em Inteligência Artificial no Brasil e no mundo.
+          </p>
+        </div>
+        <div>
+          <p class="footer-col-title">Temas</p>
+          <ul class="footer-links">
+            <li><a href="#etica" class="footer-link">Ética em IA</a></li>
+            <li><a href="#transparencia" class="footer-link">Transparência algorítmica</a></li>
+            <li><a href="#legislacao" class="footer-link">LGPD</a></li>
+            <li><a href="#legislacao" class="footer-link">EU AI Act</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Portal</p>
+          <ul class="footer-links">
+            <li><a href="#quiz" class="footer-link">Quiz interativo</a></li>
+            <li><a href="#responsabilidade" class="footer-link">Responsabilidade digital</a></li>
+            <li><a href="#contato" class="footer-link">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Legislação</p>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Lei nº 13.709/2018</a></li>
+            <li><a href="#" class="footer-link">Regulamento UE 2024/1689</a></li>
+            <li><a href="#" class="footer-link">ANPD</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2025 ÉticaIA. Produzido com IA · Tema: Ética e Governança em IA
+        </p>
+        <div class="footer-social" aria-label="Redes sociais">
+          <a href="#" class="footer-soc-link" aria-label="Instagram">📸</a>
+          <a href="#" class="footer-soc-link" aria-label="LinkedIn">💼</a>
+          <a href="#" class="footer-soc-link" aria-label="Twitter/X">🐦</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- CTA FLUTUANTE                                -->
+  <!-- ============================================ -->
+  <a href="#quiz" class="cta-float" aria-label="Fazer o Quiz de Ética em IA">
+    🧠 Fazer o Quiz
+  </a>
+
+  <!-- ============================================ -->
+  <!-- CHATBOT COM IA CLAUDE                        -->
+  <!-- ============================================ -->
+  <button class="chat-btn" id="chatBtn"
+    aria-label="Abrir assistente virtual" aria-expanded="false" aria-controls="chatWindow">
+    🤖
+    <span class="badge" aria-hidden="true">1</span>
+  </button>
+
+  <div class="chat-window" id="chatWindow" role="dialog"
+    aria-modal="true" aria-label="Assistente virtual de Ética em IA">
+    <div class="chat-header">
+      <div class="chat-avatar" aria-hidden="true">⚖️</div>
+      <div class="chat-header-info">
+        <p class="chat-header-name">Assistente Ética IA</p>
+        <p class="chat-header-status">Online — powered by Claude</p>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Fechar chat">✕</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="chat-sug" data-msg="O que é LGPD?">O que é LGPD?</button>
+      <button class="chat-sug" data-msg="O que é o AI Act europeu?">AI Act europeu</button>
+      <button class="chat-sug" data-msg="O que é viés algorítmico?">Viés algorítmico</button>
+    </div>
+
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text"
+        placeholder="Pergunte sobre ética em IA..."
+        aria-label="Digite sua pergunta">
+      <button class="chat-send" id="chatSend" aria-label="Enviar mensagem">➤</button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+    'use strict';
+
+    // ── 0. DARK / LIGHT MODE TOGGLE ──────────────
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme  = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    // ── 1. HEADER COM SCROLL ──────────────────────
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── 2. MENU MOBILE ────────────────────────────
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks   = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Fecha ao clicar em link
+    navLinks.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ESC fecha menu
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        navLinks.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        chatWindow.classList.remove('open');
+        chatBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ── 3. REVEAL ON SCROLL ───────────────────────
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── 3b. CONTADOR ANIMADO DE ESTATÍSTICAS ──────
+    function animateCounter(el, target, suffix = '') {
+      const duration = 1800;
+      const start = performance.now();
+      const isNum = !isNaN(parseInt(target));
+      if (!isNum) return; // texto puro como "LGPD"
+      const end = parseInt(target);
+      const step = t => {
+        const elapsed = performance.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(ease * end) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const statVals = document.querySelectorAll('.stat-val');
+          statVals.forEach(el => {
+            const raw = el.textContent.trim(); // ex: "127+"
+            const match = raw.match(/^(\d+)(.*)$/);
+            if (match) animateCounter(el, match[1], match[2]);
+          });
+          counterObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsEl = document.querySelector('.hero-stats');
+    if (statsEl) counterObserver.observe(statsEl);
+
+    // ── 4. TABS DE LEGISLAÇÃO ─────────────────────
+    document.querySelectorAll('.leg-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        document.querySelectorAll('.leg-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.leg-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById('panel-' + target).classList.add('active');
+      });
+    });
+
+    // ── 5. QUIZ ───────────────────────────────────
+    const quizData = [
+      {
+        q: 'O que significa a sigla LGPD?',
+        opts: ['Lei Geral de Proteção de Dados', 'Lei Geral de Privacidade Digital', 'Lei de Governança e Proteção de Dados', 'Lei Geral de Processamento de Dados'],
+        correct: 0,
+        feedback: '✅ Correto! A LGPD (Lei nº 13.709/2018) é a Lei Geral de Proteção de Dados do Brasil, que regula o tratamento de dados pessoais por organizações públicas e privadas.'
+      },
+      {
+        q: 'Qual órgão é responsável por fiscalizar o cumprimento da LGPD no Brasil?',
+        opts: ['Ministério da Justiça', 'ANPD — Autoridade Nacional de Proteção de Dados', 'ANATEL', 'Senado Federal'],
+        correct: 1,
+        feedback: '✅ Correto! A ANPD (Autoridade Nacional de Proteção de Dados) é o órgão criado pela LGPD para fiscalizar o cumprimento da lei e aplicar sanções às organizações infratoras.'
+      },
+      {
+        q: 'O que é "viés algorítmico" em sistemas de IA?',
+        opts: ['Quando um algoritmo calcula resultados com alta precisão matemática', 'Quando um algoritmo reproduz ou amplifica preconceitos presentes nos dados de treinamento', 'Um tipo de erro de programação no código-fonte', 'Quando o sistema de IA aprende mais rápido do que o esperado'],
+        correct: 1,
+        feedback: '✅ Correto! Viés algorítmico ocorre quando os dados de treinamento contêm preconceitos históricos ou sub-representação de grupos, fazendo o modelo reproduzir e amplificar desigualdades.'
+      },
+      {
+        q: 'Segundo o EU AI Act, qual destas aplicações de IA é classificada como de "risco inaceitável" e portanto PROIBIDA?',
+        opts: ['Sistemas de recomendação de filmes em plataformas de streaming', 'Filtros de spam em e-mails corporativos', 'Sistemas de scoring social usado por governos para avaliar comportamento de cidadãos', 'Assistentes virtuais de atendimento ao cliente'],
+        correct: 2,
+        feedback: '✅ Correto! O EU AI Act proíbe expressamente sistemas de scoring social que classifiquem cidadãos por comportamento, pois violam a dignidade humana e direitos fundamentais.'
+      },
+      {
+        q: 'O que é "transparência algorítmica"?',
+        opts: ['A capacidade de um algoritmo de funcionar sem erro', 'A exigência de que sistemas de IA sejam explicáveis e que suas decisões possam ser compreendidas e auditadas', 'O uso de código aberto (open source) em todos os sistemas de IA', 'A velocidade com que um algoritmo processa dados'],
+        correct: 1,
+        feedback: '✅ Correto! Transparência algorítmica é o princípio de que sistemas de IA devem ser explicáveis, rastreáveis e auditáveis, permitindo que usuários e autoridades entendam como decisões são tomadas.'
+      }
+    ];
+
+    let quizIdx = 0, quizScore = 0, answered = false;
+
+    const qQuestion = document.getElementById('quizQuestion');
+    const qOptions  = document.getElementById('quizOptions');
+    const qFeedback = document.getElementById('quizFeedback');
+    const qCounter  = document.getElementById('quizCounter');
+    const qProgress = document.getElementById('quizProgress');
+    const qNext     = document.getElementById('quizNext');
+    const qScoreTxt = document.getElementById('quizScore');
+    const qResult   = document.getElementById('quizResult');
+    const qContent  = document.getElementById('quizContent');
+    const qFinalScr = document.getElementById('quizFinalScore');
+    const qFinalLbl = document.getElementById('quizFinalLabel');
+    const qRestart  = document.getElementById('quizRestart');
+
+    function loadQuestion() {
+      answered = false;
+      const data = quizData[quizIdx];
+      qCounter.textContent  = `Pergunta ${quizIdx + 1} de ${quizData.length}`;
+      qProgress.style.width = `${((quizIdx) / quizData.length) * 100}%`;
+      qQuestion.textContent = data.q;
+      qOptions.innerHTML = '';
+      qFeedback.className = 'quiz-feedback';
+      qFeedback.textContent = '';
+      qNext.style.display = 'none';
+      qScoreTxt.textContent = quizIdx > 0 ? `Acertos: ${quizScore}/${quizIdx}` : '';
+
+      data.opts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = opt;
+        btn.setAttribute('role', 'listitem');
+        btn.addEventListener('click', () => selectOption(btn, i));
+        qOptions.appendChild(btn);
+      });
+    }
+
+    function selectOption(btn, idx) {
+      if (answered) return;
+      answered = true;
+      const data = quizData[quizIdx];
+      const opts = qOptions.querySelectorAll('.quiz-option');
+
+      opts.forEach(o => o.disabled = true);
+
+      if (idx === data.correct) {
+        btn.classList.add('correct');
+        qScore++;
+        quizScore++;
+        qFeedback.className = 'quiz-feedback correct show';
+        qFeedback.textContent = data.feedback;
+      } else {
+        btn.classList.add('wrong');
+        opts[data.correct].classList.add('correct');
+        qFeedback.className = 'quiz-feedback wrong show';
+        qFeedback.textContent = `❌ Incorreto. ${data.feedback}`;
+      }
+
+      qNext.style.display = 'block';
+      qScoreTxt.textContent = `Acertos: ${quizScore}/${quizIdx + 1}`;
+    }
+
+    qNext.addEventListener('click', () => {
+      quizIdx++;
+      if (quizIdx < quizData.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      qContent.style.display = 'none';
+      qResult.classList.add('show');
+      qProgress.style.width = '100%';
+      const pct = Math.round((quizScore / quizData.length) * 100);
+      qFinalScr.textContent = `${quizScore}/${quizData.length}`;
+      qFinalLbl.textContent = pct >= 80
+        ? '🏆 Excelente! Você domina o tema de ética em IA.'
+        : pct >= 60
+          ? '👍 Bom trabalho! Continue estudando o tema.'
+          : '📚 Continue aprendendo — explore o conteúdo do portal!';
+    }
+
+    qRestart.addEventListener('click', () => {
+      quizIdx = 0; quizScore = 0; answered = false;
+      qResult.classList.remove('show');
+      qContent.style.display = 'block';
+      loadQuestion();
+    });
+
+    loadQuestion();
+
+    // ── 6. FORMULÁRIO COM VALIDAÇÃO INLINE ───────────
+    function clearFieldError(fieldId, errorId) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      field.addEventListener('input', () => {
+        field.classList.remove('error');
+        if (error) error.classList.remove('show');
+      }, { once: false });
+    }
+    ['nome','email','mensagem'].forEach(id => clearFieldError(id, id + '-error'));
+
+    function submitForm() {
+      const nome   = document.getElementById('nome');
+      const email  = document.getElementById('email');
+      const msg    = document.getElementById('mensagem');
+      const lgpd   = document.getElementById('lgpdConsent');
+      let valid = true;
+
+      // Reset
+      ['nome','email','mensagem'].forEach(id => {
+        document.getElementById(id).classList.remove('error','valid');
+        const err = document.getElementById(id + '-error');
+        if (err) err.classList.remove('show');
+      });
+      document.getElementById('lgpd-error').classList.remove('show');
+
+      if (!nome.value.trim()) {
+        nome.classList.add('error');
+        document.getElementById('nome-error').classList.add('show');
+        nome.focus(); valid = false;
+      } else { nome.classList.add('valid'); }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailRegex.test(email.value)) {
+        email.classList.add('error');
+        document.getElementById('email-error').classList.add('show');
+        if (valid) { email.focus(); }
+        valid = false;
+      } else { email.classList.add('valid'); }
+
+      if (!msg.value.trim()) {
+        msg.classList.add('error');
+        document.getElementById('mensagem-error').classList.add('show');
+        if (valid) { msg.focus(); }
+        valid = false;
+      } else { msg.classList.add('valid'); }
+
+      if (!lgpd.checked) {
+        document.getElementById('lgpd-error').classList.add('show');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Envio simulado
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      }, 1200);
+    }
+
+    // ── 7. CHATBOT COM IA (CLAUDE API) ────────────
+    const chatBtn     = document.getElementById('chatBtn');
+    const chatWindow  = document.getElementById('chatWindow');
+    const chatClose   = document.getElementById('chatClose');
+    const chatInput   = document.getElementById('chatInput');
+    const chatSend    = document.getElementById('chatSend');
+    const chatMessages= document.getElementById('chatMessages');
+    const chatSugs    = document.getElementById('chatSuggestions');
+
+    let chatHistory = [];
+    let chatOpen = false;
+
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      chatWindow.classList.toggle('open', chatOpen);
+      chatBtn.setAttribute('aria-expanded', chatOpen);
+      chatBtn.querySelector('.badge')?.remove();
+      if (chatOpen) {
+        chatInput.focus();
+        if (chatMessages.children.length === 0) addBotMsg(
+          'Olá! 👋 Sou o assistente virtual do portal de Ética e Governança em IA, powered by Claude. Posso explicar sobre LGPD, AI Act, transparência algorítmica e muito mais. Como posso ajudar?'
+        );
+      }
+    }
+
+    chatBtn.addEventListener('click', toggleChat);
+    chatClose.addEventListener('click', toggleChat);
+
+    function addBotMsg(text) {
+      const div = document.createElement('div');
+      div.className = 'msg msg-bot';
+      div.textContent = text;
+      div.setAttribute('role', 'log');
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addUserMsg(text) {
+      const div = document.createElement('div');
+      div.className = 'msg msg-user';
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+      const div = document.createElement('div');
+      div.className = 'msg msg-bot msg-typing';
+      div.id = 'typing';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return div;
+    }
+
+    async function sendChatMsg() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      chatInput.value = '';
+      chatSugs.style.display = 'none';
+
+      addUserMsg(text);
+      chatHistory.push({ role: 'user', content: text });
+
+      const typing = addTypingIndicator();
+      chatSend.disabled = true;
+
+      try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            system: `Você é um assistente especializado em Ética e Governança em Inteligência Artificial para um portal educativo brasileiro.
+Responda sempre em português brasileiro, de forma clara, objetiva e didática.
+Foque nos temas: ética em IA, transparência algorítmica, LGPD, EU AI Act, viés algorítmico, responsabilidade digital, privacidade e governança de IA.
+Use linguagem acessível para estudantes e cidadãos, com no máximo 3 parágrafos curtos por resposta.
+Se perguntarem algo fora desses temas, redirecione gentilmente para os temas do portal.`,
+            messages: chatHistory
+          })
+        });
+
+        const data = await resp.json();
+        typing.remove();
+
+        const aiReply = data.content?.[0]?.text || 'Desculpe, não consegui responder no momento. Tente novamente.';
+        chatHistory.push({ role: 'assistant', content: aiReply });
+        addBotMsg(aiReply);
+      } catch (err) {
+        typing.remove();
+        addBotMsg('Ops! Erro de conexão. Verifique sua internet e tente novamente. 🔌');
+      } finally {
+        chatSend.disabled = false;
+        chatInput.focus();
+      }
+    }
+
+    chatSend.addEventListener('click', sendChatMsg);
+    chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendChatMsg(); });
+
+    // Sugestões rápidas
+    chatSugs.querySelectorAll('.chat-sug').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chatInput.value = btn.dataset.msg;
+        sendChatMsg();
+      });
+    });
+
+    // ── 8. DETECÇÃO DE CONEXÃO LENTA ──────────────
+    if ('connection' in navigator) {
+      const conn = navigator.connection;
+      if (conn.effectiveType === '2g' || conn.saveData) {
+        document.documentElement.style.setProperty('--t-slow', '0ms');
+      }
+    }
+
+  </script>
+</body>
+</html>
