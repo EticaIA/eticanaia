@@ -1969,55 +1969,29 @@
 
   <div class="chat-window" id="chatWindow" role="dialog"
     aria-modal="true" aria-label="Assistente virtual de Ética em IA">
-
-    <!-- Header -->
     <div class="chat-header">
       <div class="chat-avatar" aria-hidden="true">⚖️</div>
       <div class="chat-header-info">
         <p class="chat-header-name">Assistente Ética IA</p>
-        <p class="chat-header-status" id="chatStatus">Online — powered by Claude</p>
+        <p class="chat-header-status">Online — IA local</p>
       </div>
-      <button class="chat-reset-key" id="chatResetKey" style="display:none" title="Trocar chave de API">🔑 Trocar chave</button>
       <button class="chat-close" id="chatClose" aria-label="Fechar chat">✕</button>
     </div>
 
-    <!-- Painel de configuração da API Key -->
-    <div class="chat-apikey-panel" id="chatApiPanel">
-      <div class="chat-apikey-icon">🔑</div>
-      <p class="chat-apikey-title">Configure sua chave de API</p>
-      <p class="chat-apikey-desc">
-        Para usar o assistente, insira sua chave da API da Anthropic.<br>
-        Obtenha gratuitamente em
-        <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>
-      </p>
-      <div class="chat-apikey-input-wrap">
-        <input class="chat-apikey-input" type="password" id="apiKeyInput"
-          placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
-        <button class="chat-apikey-eye" id="apiKeyEye" aria-label="Mostrar/ocultar chave">👁</button>
-      </div>
-      <span class="chat-apikey-error" id="apiKeyError">Chave inválida. Deve começar com "sk-ant-".</span>
-      <button class="chat-apikey-btn" id="apiKeySave">Conectar assistente →</button>
-      <p class="chat-apikey-footer">🔒 A chave fica salva apenas no seu navegador (localStorage)</p>
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="chat-sug" data-msg="O que é LGPD?">O que é LGPD?</button>
+      <button class="chat-sug" data-msg="O que é o AI Act europeu?">AI Act europeu</button>
+      <button class="chat-sug" data-msg="O que é viés algorítmico?">Viés algorítmico</button>
     </div>
 
-    <!-- Painel do chat (oculto até ter a key) -->
-    <div id="chatMain" style="display:none; flex-direction:column; flex:1; overflow:hidden">
-      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
-
-      <div class="chat-suggestions" id="chatSuggestions">
-        <button class="chat-sug" data-msg="O que é LGPD?">O que é LGPD?</button>
-        <button class="chat-sug" data-msg="O que é o AI Act europeu?">AI Act europeu</button>
-        <button class="chat-sug" data-msg="O que é viés algorítmico?">Viés algorítmico</button>
-      </div>
-
-      <div class="chat-input-row">
-        <input class="chat-input" id="chatInput" type="text"
-          placeholder="Pergunte sobre ética em IA..."
-          aria-label="Digite sua pergunta">
-        <button class="chat-send" id="chatSend" aria-label="Enviar mensagem">➤</button>
-      </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text"
+        placeholder="Pergunte sobre ética em IA..."
+        aria-label="Digite sua pergunta">
+      <button class="chat-send" id="chatSend" aria-label="Enviar mensagem">➤</button>
     </div>
-
   </div>
 
   <!-- ============================================ -->
@@ -2325,105 +2299,129 @@
       }, 1200);
     }
 
-    // ── 7. CHATBOT COM IA (CLAUDE API) ────────────
+    // ── 7. CHATBOT INTELIGENTE (base de conhecimento local) ──────────
     const chatBtn      = document.getElementById('chatBtn');
     const chatWindow   = document.getElementById('chatWindow');
     const chatClose    = document.getElementById('chatClose');
-    const chatApiPanel = document.getElementById('chatApiPanel');
-    const chatMain     = document.getElementById('chatMain');
     const chatMessages = document.getElementById('chatMessages');
     const chatSugs     = document.getElementById('chatSuggestions');
     const chatInput    = document.getElementById('chatInput');
     const chatSend     = document.getElementById('chatSend');
-    const chatStatus   = document.getElementById('chatStatus');
-    const chatResetKey = document.getElementById('chatResetKey');
-    const apiKeyInput  = document.getElementById('apiKeyInput');
-    const apiKeySave   = document.getElementById('apiKeySave');
-    const apiKeyError  = document.getElementById('apiKeyError');
-    const apiKeyEye    = document.getElementById('apiKeyEye');
 
-    let chatHistory = [];
-    let chatOpen    = false;
-    let ANTHROPIC_KEY = localStorage.getItem('etica_ia_key') || '';
+    let chatOpen = false;
 
-    // Mostrar/ocultar senha no campo de API key
-    apiKeyEye.addEventListener('click', () => {
-      const isPass = apiKeyInput.type === 'password';
-      apiKeyInput.type = isPass ? 'text' : 'password';
-      apiKeyEye.textContent = isPass ? '🙈' : '👁';
-    });
-
-    // Salvar chave
-    apiKeySave.addEventListener('click', () => {
-      const val = apiKeyInput.value.trim();
-      if (!val.startsWith('sk-ant-')) {
-        apiKeyError.classList.add('show');
-        apiKeyInput.focus();
-        return;
+    // ── BASE DE CONHECIMENTO ──────────────────────────────────────────
+    const knowledge = [
+      {
+        keys: ['lgpd','lei geral','protecao de dados','13709','dados pessoais'],
+        answer: 'A **LGPD** (Lei Geral de Proteção de Dados — Lei nº 13.709/2018) regula como empresas e órgãos públicos coletam, armazenam e usam dados pessoais de cidadãos brasileiros.\n\nSeus princípios centrais incluem: finalidade específica, minimização de dados, consentimento informado e segurança obrigatória. O titular tem direitos como acessar, corrigir e solicitar exclusão de suas informações.\n\nA fiscalização é feita pela **ANPD** (Autoridade Nacional de Proteção de Dados), com multas de até 2% do faturamento, limitadas a R$ 50 milhões por infração.'
+      },
+      {
+        keys: ['anpd','autoridade nacional','fiscalizacao','multa','sancao'],
+        answer: 'A **ANPD** (Autoridade Nacional de Proteção de Dados) é o órgão federal responsável por fiscalizar o cumprimento da LGPD no Brasil, vinculada à Presidência da República.\n\nEntre suas funções: elaborar diretrizes para proteção de dados, fiscalizar organizações e aplicar sanções. As multas podem chegar a **2% do faturamento bruto** da empresa, com limite de R$ 50 milhões por infração.\n\nAlém de multas, a ANPD pode determinar bloqueio ou eliminação dos dados tratados de forma irregular.'
+      },
+      {
+        keys: ['ai act','eu ai act','lei europeia','regulamento europeu','europa'],
+        answer: 'O **EU AI Act** (Regulamento UE 2024/1689) é o primeiro marco regulatório mundial sobre IA, que classifica sistemas em quatro categorias:\n\n🚫 **Risco Inaceitável** (proibido): vigilância em massa, scoring social, manipulação subliminar.\n⚠️ **Alto Risco**: IA em saúde, justiça, transporte — exige avaliação prévia.\n📄 **Risco Limitado**: chatbots e deepfakes — obrigação de transparência.\n✅ **Risco Mínimo**: filtros de spam — sem restrições.\n\nAs multas chegam a **€35 milhões ou 7% do faturamento global** nas violações mais graves.'
+      },
+      {
+        keys: ['vies','bias','preconceito','discriminacao','algoritmo discrimina','algoritmico'],
+        answer: 'O **viés algorítmico** ocorre quando um sistema de IA reproduz ou amplifica preconceitos presentes nos dados de treinamento ou nas escolhas de design do sistema.\n\nExemplo: um algoritmo de seleção de currículos treinado com dados históricos de uma empresa que contratava principalmente homens tende a penalizar currículos de mulheres — mesmo sem regra explícita de discriminação.\n\nPara combater o viés são necessárias auditorias regulares, diversidade nas equipes de desenvolvimento e técnicas de **fairness analysis** antes da implantação.'
+      },
+      {
+        keys: ['transparencia','explicabilidade','xai','explicar','caixa preta','black box'],
+        answer: '**Transparência algorítmica** é o princípio de que sistemas de IA devem ser explicáveis — deve ser possível entender como e por que uma decisão foi tomada.\n\nSistemas "caixa-preta" (black box), como redes neurais profundas, são difíceis de interpretar. Técnicas de **XAI** (Explainable AI) como LIME e SHAP ajudam a tornar esses modelos mais interpretáveis.\n\nA transparência é exigida pela LGPD (art. 20) e pelo EU AI Act, que obriga sistemas de alto risco a fornecer documentação detalhada sobre seu funcionamento.'
+      },
+      {
+        keys: ['responsabilidade','quem responde','culpa','dano','erro da ia'],
+        answer: 'A **responsabilidade em IA** é distribuída entre desenvolvedores, empresas que implantam o sistema e reguladores.\n\nOs **desenvolvedores** respondem pela qualidade dos dados e pela documentação das limitações. As **empresas** respondem pelos danos causados a clientes — muitas vezes com responsabilidade objetiva, sem necessidade de provar culpa.\n\nO EU AI Act criou os conceitos de **operador** e **fornecedor** com obrigações distintas. No Brasil, o CDC e a LGPD já podem ser aplicados em casos de dano por sistemas automatizados.'
+      },
+      {
+        keys: ['privacidade','dados sensiveis','consentimento','titular','dados biometricos'],
+        answer: '**Privacidade de dados** é o direito do indivíduo de controlar como suas informações são coletadas e usadas. A LGPD define **dados sensíveis** (saúde, biometria, religião, origem racial) com proteção reforçada.\n\nO **consentimento** deve ser livre, informado, inequívoco e específico para cada finalidade. Não se aceita consentimento genérico para múltiplos fins. O titular pode revogar o consentimento a qualquer momento.\n\nBoas práticas incluem **Privacy by Design** (privacidade desde a concepção) e **minimização de dados** (coletar apenas o estritamente necessário).'
+      },
+      {
+        keys: ['governanca','regulacao','politica de ia','pl 2338','projeto de lei'],
+        answer: '**Governança em IA** é o conjunto de políticas, normas e estruturas institucionais que garantem o desenvolvimento e uso responsável da IA.\n\nUma boa estrutura inclui: comitês de ética internos, auditorias independentes, mecanismos de participação pública e canais de denúncia e reparação.\n\nOrganismos como **OCDE**, **UNESCO** e **ONU** publicaram princípios de governança que influenciam legislações nacionais. No Brasil, o **PL 2338/2023** é o principal projeto de lei para regulação da IA em tramitação no Congresso.'
+      },
+      {
+        keys: ['etica','principios','valores','o que e etica em ia','ética em ia'],
+        answer: '**Ética em IA** estuda como sistemas de inteligência artificial devem ser desenvolvidos de forma justa, segura e respeitosa aos direitos humanos.\n\nOs principais princípios reconhecidos internacionalmente são: **transparência** (sistemas explicáveis), **equidade** (sem discriminação), **privacidade** (proteção de dados), **autonomia humana** (controle humano em decisões críticas), **responsabilidade** e **benefício social**.\n\nOrganizações como IEEE, UE e UNESCO publicaram documentos detalhando esses princípios. No Brasil, a ANPD e o MCTI trabalham em diretrizes nacionais de ética em IA.'
+      },
+      {
+        keys: ['deepfake','deep fake','conteudo sintetico','imagem falsa','video falso'],
+        answer: '**Deepfakes** são conteúdos sintéticos (vídeos, áudios, imagens) gerados por IA que imitam pessoas reais de forma convincente, usando redes neurais do tipo GAN.\n\nOs riscos são sérios: desinformação política, fraude financeira, pornografia não consensual e ataques à reputação. O EU AI Act exige que conteúdos gerados por IA sejam **obrigatoriamente identificados** como tal.\n\nNo Brasil, o TSE já proibiu deepfakes eleitorais. Para se proteger, verifique a origem do conteúdo, busque múltiplas fontes e observe inconsistências visuais como piscadas estranhas ou bordas desfocadas.'
+      },
+      {
+        keys: ['ola','oi','hello','bom dia','boa tarde','boa noite','tudo bem','oi tudo'],
+        answer: 'Olá! 👋 Que ótimo ter você por aqui!\n\nSou o assistente virtual do **Portal Ética IA**. Posso te ajudar com temas como:\n• **LGPD** e proteção de dados\n• **EU AI Act** e regulação de IA\n• **Viés algorítmico** e discriminação\n• **Transparência** e explicabilidade\n• **Governança** e responsabilidade em IA\n\nÉ só perguntar! 😊'
+      },
+      {
+        keys: ['obrigado','obrigada','valeu','muito obrigado','agradeco'],
+        answer: 'Fico feliz em ajudar! 😊\n\nSe tiver mais dúvidas sobre ética em IA, LGPD, EU AI Act ou qualquer tema do portal, é só perguntar. Estou aqui para tornar esses assuntos mais acessíveis para todos!'
       }
-      apiKeyError.classList.remove('show');
-      ANTHROPIC_KEY = val;
-      localStorage.setItem('etica_ia_key', val);
-      showChatMain();
-    });
-    apiKeyInput.addEventListener('keydown', e => { if (e.key === 'Enter') apiKeySave.click(); });
-    apiKeyInput.addEventListener('input', () => apiKeyError.classList.remove('show'));
+    ];
 
-    // Trocar chave
-    chatResetKey.addEventListener('click', () => {
-      ANTHROPIC_KEY = '';
-      localStorage.removeItem('etica_ia_key');
-      chatHistory = [];
-      chatMessages.innerHTML = '';
-      chatMain.style.display = 'none';
-      chatApiPanel.style.display = '';
-      chatResetKey.style.display = 'none';
-      apiKeyInput.value = '';
-      chatStatus.textContent = 'Configure sua chave';
-    });
-
-    function showChatMain() {
-      chatApiPanel.style.display = 'none';
-      chatMain.style.display = 'flex';
-      chatResetKey.style.display = '';
-      chatStatus.textContent = 'Online — powered by Claude';
-      if (chatMessages.children.length === 0) {
-        addBotMsg('Olá! 👋 Sou o assistente do portal Ética IA, powered by Claude. Posso explicar sobre LGPD, AI Act, transparência algorítmica e muito mais. Como posso ajudar?');
-      }
-      chatInput.focus();
+    // ── MOTOR DE BUSCA NA BASE ────────────────────────────────────────
+    function normalize(str) {
+      return str.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9 ]/g, ' ');
     }
 
-    function toggleChat() {
-      chatOpen = !chatOpen;
-      chatWindow.classList.toggle('open', chatOpen);
-      chatBtn.setAttribute('aria-expanded', chatOpen);
-      chatBtn.querySelector('.badge')?.remove();
-      if (chatOpen) {
-        if (ANTHROPIC_KEY) {
-          showChatMain();
-        } else {
-          chatApiPanel.style.display = '';
-          chatMain.style.display = 'none';
-          setTimeout(() => apiKeyInput.focus(), 300);
+    function findAnswer(input) {
+      const q = normalize(input);
+      let bestMatch = null;
+      let bestScore = 0;
+
+      for (const entry of knowledge) {
+        let score = 0;
+        for (const key of entry.keys) {
+          if (q.includes(normalize(key))) {
+            score += key.split(' ').length;
+          }
         }
+        if (score > bestScore) { bestScore = score; bestMatch = entry; }
       }
+
+      if (bestMatch && bestScore > 0) return bestMatch.answer;
+
+      return 'Boa pergunta! 🤔 Ainda não tenho uma resposta específica sobre isso.\n\nPosso te ajudar com: **LGPD**, **EU AI Act**, **viés algorítmico**, **transparência**, **privacidade**, **governança** e **ética em IA**.\n\nTente reformular usando um desses termos, ou explore as seções do portal!';
     }
 
-    chatBtn.addEventListener('click', toggleChat);
-    chatClose.addEventListener('click', toggleChat);
-
-    // Se já tem chave salva, prepara o painel oculto
-    if (ANTHROPIC_KEY) {
-      chatApiPanel.style.display = 'none';
+    // ── RENDERIZAR MARKDOWN SIMPLES ───────────────────────────────────
+    function renderMsg(text) {
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
     }
 
-    function addBotMsg(text) {
+    // ── DIGITAÇÃO ANIMADA ─────────────────────────────────────────────
+    function typeMessage(el, html) {
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      const plain = temp.textContent;
+      let i = 0;
+      el.textContent = '';
+      const iv = setInterval(() => {
+        i += 3;
+        el.textContent = plain.substring(0, i);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (i >= plain.length) {
+          clearInterval(iv);
+          el.innerHTML = html;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+      }, 16);
+    }
+
+    function addBotMsg(text, animate = false) {
       const div = document.createElement('div');
       div.className = 'msg msg-bot';
-      // Suporte a quebras de linha no texto
-      div.innerHTML = text.replace(/
-/g, '<br>');
       chatMessages.appendChild(div);
+      const html = renderMsg(text);
+      if (animate) typeMessage(div, html);
+      else div.innerHTML = html;
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -2438,76 +2436,51 @@
     function addTypingIndicator() {
       const div = document.createElement('div');
       div.className = 'msg msg-bot msg-typing';
-      div.id = 'typingIndicator';
       div.innerHTML = '<span></span><span></span><span></span>';
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       return div;
     }
 
-    async function sendChatMsg() {
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      chatWindow.classList.toggle('open', chatOpen);
+      chatBtn.setAttribute('aria-expanded', chatOpen);
+      chatBtn.querySelector('.badge')?.remove();
+      if (chatOpen) {
+        if (chatMessages.children.length === 0) {
+          addBotMsg('Olá! 👋 Sou o assistente virtual do **Portal Ética IA**. Posso explicar sobre LGPD, AI Act, viés algorítmico, transparência e muito mais.\n\nComo posso ajudar?');
+        }
+        chatInput.focus();
+      }
+    }
+
+    chatBtn.addEventListener('click', toggleChat);
+    chatClose.addEventListener('click', toggleChat);
+
+    function sendChatMsg() {
       const text = chatInput.value.trim();
-      if (!text || !ANTHROPIC_KEY) return;
+      if (!text) return;
       chatInput.value = '';
       chatSugs.style.display = 'none';
-
       addUserMsg(text);
-      chatHistory.push({ role: 'user', content: text });
 
       const typing = addTypingIndicator();
       chatSend.disabled = true;
       chatInput.disabled = true;
 
-      try {
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': ANTHROPIC_KEY,
-            'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
-          },
-          body: JSON.stringify({
-            model: 'claude-haiku-4-5-20251001',
-            max_tokens: 600,
-            system: `Você é um assistente especializado em Ética e Governança em Inteligência Artificial para um portal educativo brasileiro.
-Responda sempre em português brasileiro, de forma clara, objetiva e didática.
-Foque nos temas: ética em IA, transparência algorítmica, LGPD, EU AI Act, viés algorítmico, responsabilidade digital, privacidade e governança de IA.
-Use linguagem acessível para estudantes e cidadãos. Seja conciso: no máximo 3 parágrafos curtos.
-Se perguntarem algo fora desses temas, redirecione gentilmente para os temas do portal.`,
-            messages: chatHistory
-          })
-        });
-
-        const data = await resp.json();
+      setTimeout(() => {
         typing.remove();
-
-        if (data.error) {
-          // Erro da API (ex: chave inválida, saldo esgotado)
-          const msg = data.error.type === 'authentication_error'
-            ? '🔑 Chave de API inválida ou expirada. Clique em "Trocar chave" para atualizar.'
-            : `⚠️ Erro da API: ${data.error.message}`;
-          addBotMsg(msg);
-        } else {
-          const aiReply = data.content?.[0]?.text || 'Desculpe, não consegui responder. Tente novamente.';
-          chatHistory.push({ role: 'assistant', content: aiReply });
-          addBotMsg(aiReply);
-        }
-      } catch (err) {
-        typing.remove();
-        addBotMsg('🔌 Erro de conexão. Verifique sua internet e tente novamente.');
-        console.error('Chat error:', err);
-      } finally {
+        addBotMsg(findAnswer(text), true);
         chatSend.disabled = false;
         chatInput.disabled = false;
         chatInput.focus();
-      }
+      }, 700 + Math.random() * 500);
     }
 
     chatSend.addEventListener('click', sendChatMsg);
     chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendChatMsg(); });
 
-    // Sugestões rápidas
     chatSugs.querySelectorAll('.chat-sug').forEach(btn => {
       btn.addEventListener('click', () => {
         chatInput.value = btn.dataset.msg;
